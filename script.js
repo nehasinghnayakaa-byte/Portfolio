@@ -15,8 +15,8 @@
     whatsapp: '917494907991'              // country code + number, digits only
   };
 
-  // PASTE THE KESHKANTI REEL LINK HERE, e.g. 'https://www.instagram.com/reel/AbCdEfGh123/'
-  var IG_REEL_URL = 'https://www.instagram.com/reel/REEL_ID/';
+  // PASTE THE KESH VAPSI REEL LINK HERE, e.g. 'https://www.instagram.com/p/DdwKUHtk8yR/'
+  var IG_REEL_URL = 'https://www.instagram.com/p/DdwKUHtk8yR/';
   var IG_PROFILE_URL = 'https://www.instagram.com/rohit_sharmadra/';
 
   var INITIAL_TILES = 8;                  // gallery tiles shown before "Show more"
@@ -204,7 +204,7 @@
     // No real reel link yet: show a clean fallback card instead of a broken embed
     if (IG_REEL_URL.indexOf('REEL_ID') !== -1) {
       igWrap.innerHTML =
-        '<div class="ig-fallback"><p>The Keshkanti advertisement is on Instagram.</p>' +
+        '<div class="ig-fallback"><p>The Kesh Vapsi advertisement is on Instagram.</p>' +
         '<a class="btn btn--solid" href="' + IG_PROFILE_URL + '" target="_blank" rel="noopener">Watch on Instagram</a></div>';
       return;
     }
