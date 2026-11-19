@@ -197,37 +197,13 @@
     touchX = null;
   });
 
-  /* ---------- 7. Instagram embed (built and loaded only when near the viewport) ---------- */
-  var igWrap = $('#igWrap');
-
-   function buildInstagram() {
-    // No real reel link yet: show a clean fallback card instead of a broken embed
-    if (IG_REEL_URL.indexOf('REEL_ID') !== -1) {
-      igWrap.innerHTML =
-        '<div class="ig-fallback"><p>The Keshkanti advertisement is on Instagram.</p>' +
-        '<a class="btn btn--solid" href="' + IG_PROFILE_URL + '" target="_blank" rel="noopener">Watch on Instagram</a></div>';
-      return;
-    }
-
-    // Compact embed: strip tracking params, force a trailing slash, append "embed"
-    var url = IG_REEL_URL.split('?')[0].replace(/\/?$/, '/');
-    igWrap.innerHTML =
-      '<iframe class="featured__frame" src="' + url + 'embed" ' +
-      'title="Keshkanti advertisement on Instagram" loading="lazy" ' +
-      'allowfullscreen scrolling="no" frameborder="0"></iframe>';
+ 
+    /* ---------- 7. Instagram link (no embed) ---------- */
+  var igWatch = $('#igWatch');
+  // Once IG_REEL_URL is a real link, the button opens the reel directly
+  if (igWatch && IG_REEL_URL.indexOf('REEL_ID') === -1) {
+    igWatch.href = IG_REEL_URL;
   }
-
-  if (igWrap) {
-    if (hasIO) {
-      var igObs = new IntersectionObserver(function (entries, obs) {
-        if (entries[0].isIntersecting) { buildInstagram(); obs.disconnect(); }
-      }, { rootMargin: '300px 0px' });
-      igObs.observe(igWrap);
-    } else {
-      buildInstagram();
-    }
-  }
-
   /* ---------- 8. Booking form ---------- */
   var form = $('#bookingForm');
   var statusEl = $('#formStatus');
