@@ -1,6 +1,6 @@
 /* =========================================================
    Rohit Sharma | Model Portfolio, vanilla JS, no libraries.
-   1 Helpers        5 Gallery filter + "Show more"
+   1 Helpers        5 Gallery filter + "Show more" + broken-image cleanup
    2 Scroll/header  6 Lightbox
    3 Mobile nav     7 Instagram embed (lazy)
    4 Scroll reveal  8 Booking form, 9 Footer year
@@ -8,13 +8,18 @@
 (function () {
   'use strict';
 
-  /* CONFIG: contact targets (edit here only) */
+  /* ---------- CONFIG (edit here only) ---------- */
   var CONTACT = {
     emailTo: 'sharmarohit98969@gmail.com',
     emailCc: 'nehakv001@gmail.com',
-    whatsapp: '917494907991'            // country code + number, digits only
+    whatsapp: '917494907991'              // country code + number, digits only
   };
-  var INITIAL_TILES = 8;                // tiles shown before "Show more"
+
+  // PASTE THE KESHKANTI REEL LINK HERE, e.g. 'https://www.instagram.com/reel/AbCdEfGh123/'
+  var IG_REEL_URL = 'https://www.instagram.com/reel/REEL_ID/';
+  var IG_PROFILE_URL = 'https://www.instagram.com/rohit_sharmadra/';
+
+  var INITIAL_TILES = 8;                  // gallery tiles shown before "Show more"
 
   /* ---------- 1. Helpers ---------- */
   document.documentElement.classList.add('js');
@@ -67,8 +72,7 @@
     $$('main section[id]').forEach(function (s) { spy.observe(s); });
   }
 
- 
-    /* ---------- 4. Scroll reveal (with failsafe) ---------- */
+  /* ---------- 4. Scroll reveal (with failsafe) ---------- */
   var revealEls = $$('.reveal');
   function showAll() { revealEls.forEach(function (el) { el.classList.add('is-visible'); }); }
 
@@ -80,8 +84,9 @@
       });
     }, { threshold: 0.05 });
     revealEls.forEach(function (el) { revealer.observe(el); });
-    setTimeout(showAll, 2500);   // failsafe: nothing stays hidden
+    setTimeout(showAll, 2500);            // failsafe: nothing stays hidden
   }
+
   /* ---------- 5. Gallery filter + "Show more" ---------- */
   var filterBtns = $$('.filters__btn');
   var tiles = $$('.gallery__item');
@@ -91,7 +96,9 @@
   var expanded = false;
 
   function renderGallery(animate) {
-    var matches = tiles.filter(function (t) { return activeFilter === 'all' || t.dataset.category === activeFilter; });
+    var matches = tiles.filter(function (t) {
+      return !t.dataset.broken && (activeFilter === 'all' || t.dataset.category === activeFilter);
+    });
     tiles.forEach(function (t) { t.hidden = true; t.classList.remove('is-pop'); });
 
     matches.forEach(function (t, i) {
@@ -100,8 +107,7 @@
       if (show && animate) { void t.offsetWidth; t.classList.add('is-pop'); }
     });
 
-    var needsToggle = matches.length > INITIAL_TILES;
-    moreWrap.hidden = !needsToggle;
+    moreWrap.hidden = matches.length <= INITIAL_TILES;
     moreBtn.textContent = expanded ? 'Show less' : 'Show more';
     moreBtn.setAttribute('aria-expanded', String(expanded));
   }
@@ -118,6 +124,15 @@
     });
   });
   moreBtn.addEventListener('click', function () { expanded = !expanded; renderGallery(true); });
+
+  // If an image file is missing, drop its tile so no broken-image boxes show
+  tiles.forEach(function (tile) {
+    var img = $('img', tile);
+    img.addEventListener('error', function () {
+      tile.dataset.broken = '1';
+      renderGallery(false);
+    });
+  });
   renderGallery(false);
 
   /* ---------- 6. Lightbox ---------- */
@@ -147,7 +162,7 @@
   }
   function closeLightbox() {
     lightbox.hidden = true;
-    lbImg.src = '';
+    lbImg.removeAttribute('src');
     document.body.style.overflow = '';
     if (lastFocus) lastFocus.focus();
   }
@@ -182,10 +197,23 @@
     touchX = null;
   });
 
-  /* ---------- 7. Instagram embed (loads embed.js only when near viewport) ---------- */
+  /* ---------- 7. Instagram embed (built and loaded only when near the viewport) ---------- */
   var igWrap = $('#igWrap');
 
-  function loadInstagram() {
+  function buildInstagram() {
+    // No real reel link yet: show a clean fallback card instead of a broken embed
+    if (IG_REEL_URL.indexOf('REEL_ID') !== -1) {
+      igWrap.innerHTML =
+        '<div class="ig-fallback"><p>The Keshkanti advertisement is on Instagram.</p>' +
+        '<a class="btn btn--solid" href="' + IG_PROFILE_URL + '" target="_blank" rel="noopener">Watch on Instagram</a></div>';
+      return;
+    }
+    var url = IG_REEL_URL.split('?')[0];
+    igWrap.innerHTML =
+      '<blockquote class="instagram-media" data-instgrm-permalink="' + url + '?utm_source=ig_embed&amp;utm_campaign=loading" ' +
+      'data-instgrm-version="14" style="background:#fff;border:0;border-radius:6px;margin:0 auto;max-width:540px;min-width:280px;padding:0;width:100%;">' +
+      '<a href="' + url + '" target="_blank" rel="noopener">Watch the Keshkanti advertisement on Instagram</a></blockquote>';
+
     if (window.instgrm && window.instgrm.Embeds) { window.instgrm.Embeds.process(); return; }
     var s = document.createElement('script');
     s.async = true;
@@ -193,14 +221,15 @@
     s.onload = function () { if (window.instgrm) window.instgrm.Embeds.process(); };
     document.body.appendChild(s);
   }
+
   if (igWrap) {
     if (hasIO) {
       var igObs = new IntersectionObserver(function (entries, obs) {
-        if (entries[0].isIntersecting) { loadInstagram(); obs.disconnect(); }
+        if (entries[0].isIntersecting) { buildInstagram(); obs.disconnect(); }
       }, { rootMargin: '300px 0px' });
       igObs.observe(igWrap);
     } else {
-      loadInstagram();
+      buildInstagram();
     }
   }
 
