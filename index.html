@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rohit Sharma | Male Model | Karnal, Haryana, India</title>
+  <meta name="description" content="Official portfolio of Rohit Sharma, male model based in Karnal, Haryana, India. View the portfolio, measurements and send a booking inquiry.">
+  <meta name="theme-color" content="#0e0e10">
+
+  <!-- No external fonts or libraries: system font stacks are defined in style.css -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Structured data for search engines (the only inline script, as allowed) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Rohit Sharma",
+    "jobTitle": "Male Model",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Karnal",
+      "addressRegion": "Haryana",
+      "addressCountry": "IN"
+    },
+    "email": "mailto:sharmarohit98969@gmail.com"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#home">Skip to content</a>
+
+  <!-- Scroll progress bar + custom cursor (both driven by script.js, desktop only for cursor) -->
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor-label">View</span></div>
+
+  <!-- ============ STICKY NAVIGATION ============ -->
+  <header class="site-header" id="top">
+    <nav class="nav container" aria-label="Primary">
+      <a class="brand" href="#home" aria-label="Rohit Sharma, home">RS<span>.</span></a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+        <li><a href="#measurements" class="nav-link">Measurements</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#contact" class="nav-link nav-cta" data-magnetic>Book</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ HOME / HERO ============ -->
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+
+        <div class="hero-text">
+          <p class="eyebrow"><i>Male Model</i></p>
+
+          <h1 aria-label="Rohit Sharma">
+            <span class="line"><span class="word" data-split>Rohit</span></span>
+            <span class="line outline"><span class="word" data-split>Sharma</span></span>
+          </h1>
+
+          <p class="hero-location">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.500A2.500 2.500 0 1 1 12 6.500a2.500 2.500 0 0 1 0 5Z"/></svg>
+            Karnal, Haryana, India
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-solid" href="#portfolio" data-magnetic>View Portfolio</a>
+            <a class="btn btn-ghost" href="#contact" data-magnetic>Book Rohit</a>
+          </div>
+        </div>
+
+        <figure class="hero-photo" id="heroPhoto">
+          <div class="hero-photo-inner">
+            <!-- HERO PHOTO: file is photos/hero.jpg (navy polo, cream trousers) -->
+            <img src="hero.jpg"
+                 alt="Rohit Sharma in a navy polo shirt and cream trousers"
+                 width="800" height="1000" fetchpriority="high">
+          </div>
+          <span class="chip chip-status"><b class="pulse"></b> Open for bookings</span>
+          <span class="chip chip-loc">Karnal · India</span>
+        </figure>
+      </div>
+
+      <a class="scroll-hint" href="#about" aria-label="Scroll to About"><span></span></a>
+    </section>
+
+    <!-- Marquee strip -->
+    <div class="marquee" aria-hidden="true">
+      <div class="track">
+        <span>Male Model</span><span>Karnal, Haryana</span><span>Commercial</span><span>Editorial</span><span>Headshot</span><span>Full-body</span>
+        <span>Male Model</span><span>Karnal, Haryana</span><span>Commercial</span><span>Editorial</span><span>Headshot</span><span>Full-body</span>
+      </div>
+    </div>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div class="reveal">
+          <p class="eyebrow"><i>01</i> About</p>
+          <h2>Quiet confidence, <em>considered presence.</em></h2>
+        </div>
+
+        <div class="reveal about-copy">
+          <p class="lead">
+            Rohit Sharma is an emerging male model from Karnal, Haryana, building a portfolio defined by
+            clean lines, natural expression and a calm, assured screen presence.
+            Equally at ease in commercial work and refined editorial concepts, he brings preparation,
+            punctuality and a collaborative spirit to every set.
+            Currently open to bookings with brands, photographers and creative teams.
+          </p>
+          <ul class="facts">
+            <li><span>Based in</span> Karnal, Haryana</li>
+            <li><span>Focus</span> Commercial &amp; Editorial</li>
+            <li><span>Status</span> Open to bookings</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PORTFOLIO ============ -->
+    <section class="section section-surface" id="portfolio">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow"><i>02</i> Portfolio</p>
+            <h2>Selected <em>work</em></h2>
+          </div>
+
+          <!-- Category filter -->
+          <div class="filters" role="group" aria-label="Filter portfolio by category">
+            <button class="filter is-active" data-filter="all" aria-pressed="true">All</button>
+            <button class="filter" data-filter="headshot" aria-pressed="false">Headshot</button>
+            <button class="filter" data-filter="fullbody" aria-pressed="false">Full-body</button>
+            <button class="filter" data-filter="profile" aria-pressed="false">Profile</button>
+            <button class="filter" data-filter="editorial" aria-pressed="false">Editorial</button>
+          </div>
+        </div>
+
+        <!--
+          PORTFOLIO PHOTOS
+          All images live in the "photos" folder next to this file.
+          To swap a photo: replace the file in /photos (same name), or change the src below.
+          Keep data-category as one of: headshot | fullbody | profile | editorial.
+          The first tile (class "tile--feature") is shown large when "All" is selected.
+          Optional: add data-full="photos/original.jpg" on a <button> for a sharper lightbox image.
+        -->
+        <ul class="gallery" id="gallery">
+
+          <!-- 01 · expo, black suit and tie -->
+          <li class="tile tile--feature" data-category="headshot">
+            <button class="tile-btn" aria-label="Open Headshot 01 in lightbox">
+              <img loading="lazy" width="800" height="1000" src="profile-1.jpg.png"
+                   alt="Rohit Sharma in a black suit and striped tie at a business expo">
+              <span class="tile-meta"><i>01</i> Headshot</span>
+            </button>
+          </li>
+
+          <!-- 02 · seated, checked shirt, relaxed -->
+          <li class="tile" data-category="fullbody">
+            <button class="tile-btn" aria-label="Open Full-body 01 in lightbox">
+              <img loading="lazy" width="800" height="1000" src="fullbody.jpg.jpeg"
+                   alt="Rohit Sharma relaxing on a lounge sofa in a green checked shirt and jeans">
+              <span class="tile-meta"><i>02</i> Full-body</span>
+            </button>
+          </li>
+
+          <!-- 03 · red sweatshirt, side profile, sunglasses -->
+          <li class="tile" data-category="profile">
+            <button class="tile-btn" aria-label="Open Profile 01 in lightbox">
+              <img loading="lazy" width="800" height="1000" src="headshot-3.jpeg"
+                   alt="Side profile of Rohit Sharma in sunglasses and a red sweatshirt, mountains behind">
+              <span class="tile-meta"><i>03</i> Profile</span>
+            </button>
+          </li>
+
+          <!-- 04 · restaurant, black leather jacket -->
+          <li class="tile" data-category="editorial">
+            <button class="tile-btn" aria-label="Open Editorial 01 in lightbox">
+              <img loading="lazy" width="800" height="1000" src="editorial-1.jpg.jpeg"
+                   alt="Rohit Sharma in a black leather jacket, chin resting on hand, looking aside">
+              <span class="tile-meta"><i>04</i> Editorial</span>
+            </button>
+          </li>
+
+          <!-- 05 · lockers, white sleeveless jersey, headphones -->
+          <li class="tile" data-category="fullbody">
+            <button class="tile-btn" aria-label="Open Full-body 02 in lightbox">
+              <img loading="lazy" width="800" height="1000" src="fullbody-2.jpeg"
+                   alt="Rohit Sharma in a white sleeveless jersey and headphones against grey lockers">
+              <span class="tile-meta"><i>05</i> Full-body</span>
+            </button>
+          </li>
+
+          <!-- 06 · lake, tie-dye shirt, aviators -->
+          <li class="tile" data-category="profile">
+            <button class="tile-btn" aria-label="Open Profile 02 in lightbox">
+              <img loading="lazy" width="800" height="1000" src="headshot-8.png"
+                   alt="Rohit Sharma in aviator sunglasses and a tie-dye shirt, arms crossed by a lake">
+              <span class="tile-meta"><i>06</i> Profile</span>
+            </button>
+          </li>
+
+          <!-- 07 · red sweatshirt, head tilted up -->
+          <li class="tile" data-category="editorial">
+            <button class="tile-btn" aria-label="Open Editorial 02 in lightbox">
+              <img loading="lazy" width="800" height="1000" src="editorial-2.jpg.jpeg"
+                   alt="Rohit Sharma looking up toward the sky in a red sweatshirt and sunglasses">
+              <span class="tile-meta"><i>07</i> Editorial</span>
+            </button>
+          </li>
+
+          <!-- 08 · suit, mirror shot -->
+          <li class="tile" data-category="headshot">
+            <button class="tile-btn" aria-label="Open Headshot 02 in lightbox">
+              <img loading="lazy" width="800" height="1000" src="profile-2.jpg.png"
+                   alt="Rohit Sharma in a dark suit and tie, mirror shot">
+              <span class="tile-meta"><i>08</i> Headshot</span>
+            </button>
+          </li>
+
+          <!-- 09 · gym, black and white -->
+          <li class="tile" data-category="editorial">
+            <button class="tile-btn" aria-label="Open Editorial 03 in lightbox">
+              <img loading="lazy" width="800" height="1000" src="editorial-3.jpeg"
+                   alt="Black and white gym photograph of Rohit Sharma with arm raised">
+              <span class="tile-meta"><i>09</i> Editorial</span>
+            </button>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ MEASUREMENTS ============ -->
+    <section class="section section-light" id="measurements">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow"><i>03</i> Measurements</p>
+            <h2>The <em>details</em></h2>
+          </div>
+        </div>
+        <dl class="specs reveal">
+          <div class="spec"><dt>Height</dt><dd>6 ft</dd></div>
+          <div class="spec"><dt>Hair</dt><dd>Black</dd></div>
+          <div class="spec"><dt>Eyes</dt><dd>Brown</dd></div>
+          <div class="spec"><dt>Clothing Size</dt><dd>XL</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section class="section" id="experience">
+      <div class="container narrow">
+        <div class="reveal">
+          <p class="eyebrow"><i>04</i> Experience</p>
+          <h2>Work &amp; <em>campaigns</em></h2>
+        </div>
+
+        <ul class="timeline reveal">
+          <li>
+            <h3>Emerging Model</h3>
+            <p>Actively developing a professional portfolio across commercial, headshot and editorial work.</p>
+          </li>
+          <li>
+            <h3>Zee Laboratories <span class="tag">Commercial</span></h3>
+            <p>Advertisement for Kesh Vapisi hair serum.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section section-surface" id="contact">
+      <div class="container contact-grid">
+
+        <div class="contact-info reveal">
+          <p class="eyebrow"><i>05</i> Contact</p>
+          <h2>Book <em>Rohit</em></h2>
+          <p class="lead small">For bookings, castings and collaborations, reach out directly or send an inquiry.</p>
+
+          <ul class="contact-list">
+            <li>
+              <span class="label">Booking emails</span>
+              <a href="mailto:sharmarohit98969@gmail.com">sharmarohit98969@gmail.com</a>
+              <a href="mailto:nehakv001@gmail.com">nehakv001@gmail.com</a>
+            </li>
+            <li>
+              <span class="label">Phone / WhatsApp</span>
+              <a href="tel:+917494907991">+91 74949 07991</a>
+              <a href="https://wa.me/917494907991" target="_blank" rel="noopener">Message on WhatsApp</a>
+            </li>
+            <li>
+              <span class="label">Instagram</span>
+              <!-- INSTAGRAM: replace YOUR_USERNAME with the real handle (both in the link and the text) -->
+              <a href="https://www.instagram.com/rohit_sharmadra/" target="_blank" rel="noopener">@Rohit Sharma</a>
+            </li>
+            <li>
+              <span class="label">Manager</span>
+              <a href="mailto:sharmarohit98969@gmail.com">sharmarohit98969@gmail.com</a>
+            </li>
+          </ul>
+
+          <!-- SOCIAL MEDIA LINKS
+               Instagram: replace YOUR_USERNAME with the real handle.
+               LinkedIn: replace href="#" with the real profile URL. -->
+          <div class="socials">
+            <a href="https://www.instagram.com/rohit_sharmadra/" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Zm5 5.500a3.500 3.500 0 1 0 0 7 3.500 3.500 0 0 0 0-7Zm5.200-2.200v.01"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/rohit-sharma-0997a1401/" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <!-- LINKEDIN URL GOES HERE -->
+               
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M4.500 3A1.800 1.800 0 1 0 4.500 6.600 1.800 1.800 0 0 0 4.500 3ZM3 8.500h3V21H3V8.500Zm5.500 0h2.900v1.700c.5-.9 1.700-2 3.600-2 3.300 0 4 2.100 4 5V21h-3v-6.800c0-1.600 0-3.200-2-3.200s-2.300 1.500-2.300 3.100V21h-3V8.500Z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Booking inquiry form (no backend: opens a prefilled email or WhatsApp message) -->
+        <form class="form reveal" id="bookingForm" novalidate>
+          <h3>Booking inquiry</h3>
+
+          <div class="field">
+            <label for="name">Your name</label>
+            <input type="text" id="name" name="name" autocomplete="name" required>
+            <span class="error" data-error-for="name"></span>
+          </div>
+
+          <div class="field">
+            <label for="company">Brand / company</label>
+            <input type="text" id="company" name="company" autocomplete="organization" required>
+            <span class="error" data-error-for="company"></span>
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+            <span class="error" data-error-for="email"></span>
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Project details, dates, location, usage..."></textarea>
+            <span class="error" data-error-for="message"></span>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-solid" name="channel" value="email" data-magnetic>Send via Email</button>
+            <button type="submit" class="btn btn-ghost" name="channel" value="whatsapp" data-magnetic>Send via WhatsApp</button>
+          </div>
+
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year">2026</span> Rohit Sharma. All rights reserved.</p>
+      <!-- INSTAGRAM: replace YOUR_USERNAME with the real handle -->
+      <a href="https://www.instagram.com/rohit_sharmadra/" target="_blank" rel="noopener">Instagram</a>
+      <a href="#top">Back to top &uarr;</a>
+    </div>
+  </footer>
+
+  <!-- ============ LIGHTBOX (controlled by script.js) ============ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview" hidden>
+    <button class="lb-close" id="lbClose" aria-label="Close preview">&times;</button>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous image">&#8249;</button>
+    <figure class="lb-figure">
+      <img id="lbImg" src="" alt="">
+      <figcaption id="lbCaption"></figcaption>
+    </figure>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Next image">&#8250;</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
