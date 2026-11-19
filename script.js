@@ -200,26 +200,21 @@
   /* ---------- 7. Instagram embed (built and loaded only when near the viewport) ---------- */
   var igWrap = $('#igWrap');
 
-  function buildInstagram() {
+   function buildInstagram() {
     // No real reel link yet: show a clean fallback card instead of a broken embed
     if (IG_REEL_URL.indexOf('REEL_ID') !== -1) {
       igWrap.innerHTML =
-        '<div class="ig-fallback"><p>The Kesh Vapsi advertisement is on Instagram.</p>' +
+        '<div class="ig-fallback"><p>The Keshkanti advertisement is on Instagram.</p>' +
         '<a class="btn btn--solid" href="' + IG_PROFILE_URL + '" target="_blank" rel="noopener">Watch on Instagram</a></div>';
       return;
     }
-    var url = IG_REEL_URL.split('?')[0];
-    igWrap.innerHTML =
-      '<blockquote class="instagram-media" data-instgrm-permalink="' + url + '?utm_source=ig_embed&amp;utm_campaign=loading" ' +
-      'data-instgrm-version="14" style="background:#fff;border:0;border-radius:6px;margin:0 auto;max-width:326px;min-width:280px;padding:0;width:100%;">' +
-      '<a href="' + url + '" target="_blank" rel="noopener">Watch the Kesh Vapsi advertisement on Instagram</a></blockquote>';
 
-    if (window.instgrm && window.instgrm.Embeds) { window.instgrm.Embeds.process(); return; }
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.instagram.com/embed.js';
-    s.onload = function () { if (window.instgrm) window.instgrm.Embeds.process(); };
-    document.body.appendChild(s);
+    // Compact embed: strip tracking params, force a trailing slash, append "embed"
+    var url = IG_REEL_URL.split('?')[0].replace(/\/?$/, '/');
+    igWrap.innerHTML =
+      '<iframe class="featured__frame" src="' + url + 'embed" ' +
+      'title="Keshkanti advertisement on Instagram" loading="lazy" ' +
+      'allowfullscreen scrolling="no" frameborder="0"></iframe>';
   }
 
   if (igWrap) {
