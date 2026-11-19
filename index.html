@@ -15,6 +15,24 @@
 
   <link rel="stylesheet" href="style.css">
 
+  <!-- Image extension fallback: if "photo.jpg" is missing, try .jpeg, .png, .webp and doubled extensions.
+       Only images with a data-photo attribute are affected. -->
+  <script>
+  (function () {
+    var EXT = ['jpg', 'jpeg', 'png', 'webp', 'jpg.jpg', 'jpg.jpeg', 'jpg.png', 'jpeg.jpeg', 'jpeg.jpg', 'png.png', 'png.jpg', 'JPG', 'JPEG', 'PNG'];
+    document.addEventListener('error', function (e) {
+      var img = e.target;
+      if (!img || img.tagName !== 'IMG' || !img.hasAttribute('data-photo')) return;
+      var n = +(img.getAttribute('data-try') || 1);   // src already tried EXT[0]
+      if (n < EXT.length) {
+        e.stopImmediatePropagation();                 // hide the failure until every option is tried
+        img.setAttribute('data-try', n + 1);
+        img.src = img.getAttribute('data-photo') + '.' + EXT[n];
+      }
+    }, true);
+  })();
+  </script>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -55,7 +73,7 @@
     <section class="hero" id="home" aria-labelledby="heroTitle">
       <div class="container hero__grid">
         <figure class="hero__photo">
-          <img src="hero.jpg" width="800" height="1000" fetchpriority="high"
+          <img src="hero.jpg" data-photo="hero" width="844" height="1055" fetchpriority="high" style="object-position:50% 15%"
                alt="Rohit Sharma in a navy polo shirt and cream trousers, arms crossed, leaning against a wooden wardrobe">
           <span class="chip"><b class="chip__dot"></b> Open for bookings</span>
         </figure>
@@ -117,124 +135,152 @@
             <button class="filters__btn" data-filter="fullbody" aria-pressed="false">Full-body</button>
             <button class="filters__btn" data-filter="editorial" aria-pressed="false">Editorial</button>
             <button class="filters__btn" data-filter="business" aria-pressed="false">Business</button>
+            <button class="filters__btn" data-filter="fitness" aria-pressed="false">Fitness</button>
           </div>
         </div>
 
         <!--
-          GALLERY
-          Images live in the SAME folder as index.html.
-          The first 7 use your existing filenames. The rest are new names: save those photos with
-          exactly these names (or edit the src). Missing images are removed automatically.
-          --pos controls which part stays visible when cropped to 4:5.
+          GALLERY: 19 photos (the 20th, the navy polo, is the hero above).
+          src = base name + .jpg. data-photo = base name only (used by the extension fallback).
+          To remove a photo, delete its whole <li>...</li> block.
+          --pos controls which part stays visible when the photo is cropped to 4:5.
         -->
         <ul class="gallery" id="gallery">
-          <!-- Existing files -->
-          <li class="gallery__item" data-category="business">
-            <button class="gallery__btn" aria-label="Open photo: suit at a business expo">
-              <img loading="lazy" width="800" height="1000" src="profile-1.jpg.png" style="--pos:50% 30%"
-                   alt="Rohit Sharma in a black suit and striped tie with a delegate badge at a business expo">
-            </button>
-          </li>
-          <li class="gallery__item" data-category="fullbody">
-            <button class="gallery__btn" aria-label="Open photo: relaxing on a lounge sofa">
-              <img loading="lazy" width="800" height="1000" src="fullbody.jpg.jpeg" style="--pos:50% 40%"
-                   alt="Rohit Sharma relaxing on a lounge sofa in a green checked shirt and jeans, hands behind his head">
-            </button>
-          </li>
-          <li class="gallery__item" data-category="portrait">
-            <button class="gallery__btn" aria-label="Open photo: red sweatshirt side profile">
-              <img loading="lazy" width="800" height="1000" src="headshot-3.jpeg" style="--pos:50% 30%"
-                   alt="Side profile of Rohit Sharma in sunglasses and a red sweatshirt with green mountains behind">
-            </button>
-          </li>
-          <li class="gallery__item" data-category="editorial">
-            <button class="gallery__btn" aria-label="Open photo: restaurant, leather jacket">
-              <img loading="lazy" width="800" height="1000" src="editorial-1.jpg.jpeg" style="--pos:50% 40%"
-                   alt="Rohit Sharma in a black leather jacket seated in a restaurant booth, chin resting on his hand">
-            </button>
-          </li>
-          <li class="gallery__item" data-category="portrait">
-            <button class="gallery__btn" aria-label="Open photo: lakeside portrait">
-              <img loading="lazy" width="800" height="1000" src="headshot-8.png" style="--pos:50% 40%"
-                   alt="Rohit Sharma in aviator sunglasses and a tie-dye shirt, arms crossed beside a lake and green hills">
-            </button>
-          </li>
-          <li class="gallery__item" data-category="editorial">
-            <button class="gallery__btn" aria-label="Open photo: looking up in a red sweatshirt">
-              <img loading="lazy" width="800" height="1000" src="editorial-2.jpg.jpeg" style="--pos:50% 30%"
-                   alt="Rohit Sharma tilting his head to the sky in sunglasses and a red sweatshirt">
-            </button>
-          </li>
-          <li class="gallery__item" data-category="business">
-            <button class="gallery__btn" aria-label="Open photo: suit, mirror shot">
-              <img loading="lazy" width="800" height="1000" src="profile-2.jpg.png" style="--pos:50% 30%"
-                   alt="Rohit Sharma in a dark suit and tie taking a mirror photo">
-            </button>
-          </li>
 
-          <!-- New files: save your new photos with these names in the same folder -->
-          <li class="gallery__item" data-category="editorial">
-            <button class="gallery__btn" aria-label="Open photo: rooftop at night in a leather jacket">
-              <img loading="lazy" width="800" height="1000" src="rooftop-front.jpg" style="--pos:50% 85%"
+          <li class="gallery__item" data-category="portrait">
+            <button class="gallery__btn" aria-label="Open photo: rooftop at night, leather jacket">
+              <img loading="lazy" width="800" height="1000" src="rooftop-front.jpg" data-photo="rooftop-front" style="--pos:50% 85%"
                    alt="Rohit Sharma in a black leather jacket and grey tee on a city rooftop at night, hands in pockets">
             </button>
           </li>
-          <li class="gallery__item" data-category="portrait">
-            <button class="gallery__btn" aria-label="Open photo: sunlit portrait">
-              <img loading="lazy" width="800" height="1000" src="sunlit-portrait.jpg" style="--pos:60% 35%"
-                   alt="Sunlit portrait of Rohit Sharma in a mint ribbed tee, one arm raised behind his head, green foliage behind">
-            </button>
-          </li>
-          <li class="gallery__item" data-category="fullbody">
-            <button class="gallery__btn" aria-label="Open photo: festival evening full-body">
-              <img loading="lazy" width="800" height="1000" src="festival-fullbody.jpg" style="--pos:50% 45%"
-                   alt="Full-length photo of Rohit Sharma in a black shirt and cream trousers at an evening festival">
-            </button>
-          </li>
-          <li class="gallery__item" data-category="fullbody">
-            <button class="gallery__btn" aria-label="Open photo: rooftop full-body">
-              <img loading="lazy" width="800" height="1000" src="rooftop-fullbody.jpg" style="--pos:50% 62%"
-                   alt="Full-length view of Rohit Sharma leaning on a rooftop railing, arms spread, city lights behind">
-            </button>
-          </li>
-          <li class="gallery__item" data-category="business">
-            <button class="gallery__btn" aria-label="Open photo: suit in front of country flags">
-              <img loading="lazy" width="800" height="1000" src="flags-suit.jpg" style="--pos:50% 40%"
-                   alt="Rohit Sharma in a black suit standing before a wall of participating-country flags">
-            </button>
-          </li>
-          <li class="gallery__item" data-category="editorial">
-            <button class="gallery__btn" aria-label="Open photo: rooftop, looking aside">
-              <img loading="lazy" width="800" height="1000" src="rooftop-side.jpg" style="--pos:50% 85%"
-                   alt="Rohit Sharma in a leather jacket looking off to the side against a night skyline">
-            </button>
-          </li>
-          <li class="gallery__item" data-category="fullbody">
-            <button class="gallery__btn" aria-label="Open photo: leather armchair">
-              <img loading="lazy" width="800" height="1000" src="lounge-chair.jpg" style="--pos:50% 40%"
-                   alt="Rohit Sharma in a green checked shirt and jeans seated in a leather armchair, hand behind his head">
-            </button>
-          </li>
+
           <li class="gallery__item" data-category="portrait">
             <button class="gallery__btn" aria-label="Open photo: green checked shirt portrait">
-              <img loading="lazy" width="800" height="1000" src="plaid-selfie.jpg" style="--pos:45% 30%"
+              <img loading="lazy" width="800" height="1000" src="plaid-selfie.jpg" data-photo="plaid-selfie" style="--pos:42% 40%"
                    alt="Close portrait of Rohit Sharma in a green and blue checked shirt among potted plants">
             </button>
           </li>
-          <li class="gallery__item" data-category="fullbody">
-            <button class="gallery__btn" aria-label="Open photo: rooftop, relaxed head tilt">
-              <img loading="lazy" width="800" height="1000" src="rooftop-tilt.jpg" style="--pos:50% 80%"
-                   alt="Rohit Sharma in a leather jacket leaning on a railing with a relaxed head tilt, night city behind">
+
+          <li class="gallery__item" data-category="portrait">
+            <button class="gallery__btn" aria-label="Open photo: red sweatshirt, side profile">
+              <img loading="lazy" width="800" height="1000" src="red-sweatshirt-profile.jpg" data-photo="red-sweatshirt-profile" style="--pos:50% 30%"
+                   alt="Side profile of Rohit Sharma in sunglasses and a red sweatshirt with green mountains behind">
             </button>
           </li>
 
-          <!-- Existing file, kept last (the photo looks heavily stylized; consider replacing it) -->
+          <li class="gallery__item" data-category="business">
+            <button class="gallery__btn" aria-label="Open photo: suit at a business expo">
+              <img loading="lazy" width="800" height="1000" src="expo-suit.jpg" data-photo="expo-suit" style="--pos:48% 30%"
+                   alt="Rohit Sharma in a black suit and striped tie with a delegate badge at a health expo in New Delhi">
+            </button>
+          </li>
+
+          <li class="gallery__item" data-category="fullbody">
+            <button class="gallery__btn" aria-label="Open photo: evening festival, full-body">
+              <img loading="lazy" width="800" height="1000" src="festival-fullbody.jpg" data-photo="festival-fullbody" style="--pos:50% 20%"
+                   alt="Full-length photo of Rohit Sharma in a black shirt and cream trousers at an evening festival">
+            </button>
+          </li>
+
           <li class="gallery__item" data-category="editorial">
+            <button class="gallery__btn" aria-label="Open photo: restaurant booth, leather jacket">
+              <img loading="lazy" width="800" height="1000" src="restaurant-jacket.jpg" data-photo="restaurant-jacket" style="--pos:50% 40%"
+                   alt="Rohit Sharma in a black leather jacket seated in a restaurant booth, chin resting on his hand">
+            </button>
+          </li>
+
+          <li class="gallery__item" data-category="portrait">
+            <button class="gallery__btn" aria-label="Open photo: lakeside portrait">
+              <img loading="lazy" width="800" height="1000" src="lake-aviators.jpg" data-photo="lake-aviators" style="--pos:50% 40%"
+                   alt="Rohit Sharma in aviator sunglasses and a tie-dye shirt, arms crossed beside a lake and green hills">
+            </button>
+          </li>
+
+          <li class="gallery__item" data-category="fullbody">
+            <button class="gallery__btn" aria-label="Open photo: rooftop, arms spread, wide view">
+              <img loading="lazy" width="800" height="1000" src="rooftop-wide.jpg" data-photo="rooftop-wide" style="--pos:50% 70%"
+                   alt="Wide view of Rohit Sharma leaning on a rooftop railing with arms spread, tables and city lights behind">
+            </button>
+          </li>
+
+          <!-- Tiles below appear after "Show more" -->
+          <li class="gallery__item" data-category="editorial">
+            <button class="gallery__btn" aria-label="Open photo: rooftop, looking aside">
+              <img loading="lazy" width="800" height="1000" src="rooftop-side.jpg" data-photo="rooftop-side" style="--pos:50% 85%"
+                   alt="Rohit Sharma in a leather jacket looking off to the side against a night skyline">
+            </button>
+          </li>
+
+          <li class="gallery__item" data-category="portrait">
+            <button class="gallery__btn" aria-label="Open photo: rooftop, relaxed smile">
+              <img loading="lazy" width="800" height="1000" src="rooftop-tilt.jpg" data-photo="rooftop-tilt" style="--pos:50% 85%"
+                   alt="Rohit Sharma smiling with a relaxed head tilt, arms resting on a rooftop railing at night">
+            </button>
+          </li>
+
+          <li class="gallery__item" data-category="editorial">
+            <button class="gallery__btn" aria-label="Open photo: snowy mountain road">
+              <img loading="lazy" width="800" height="1000" src="snow-road.jpg" data-photo="snow-road" style="--pos:50% 30%"
+                   alt="Rohit Sharma in sunglasses and a black racing-style jacket on a road in snow-covered mountains">
+            </button>
+          </li>
+
+          <li class="gallery__item" data-category="editorial">
+            <button class="gallery__btn" aria-label="Open photo: red sweatshirt, looking up">
+              <img loading="lazy" width="800" height="1000" src="red-sweatshirt-up.jpg" data-photo="red-sweatshirt-up" style="--pos:50% 50%"
+                   alt="Rohit Sharma tilting his head to the sky in sunglasses and a red sweatshirt">
+            </button>
+          </li>
+
+          <li class="gallery__item" data-category="fullbody">
+            <button class="gallery__btn" aria-label="Open photo: lounge sofa">
+              <img loading="lazy" width="800" height="1000" src="lounge-sofa.jpg" data-photo="lounge-sofa" style="--pos:50% 30%"
+                   alt="Rohit Sharma relaxing on a lounge sofa in a green checked shirt and jeans, hands behind his head">
+            </button>
+          </li>
+
+          <li class="gallery__item" data-category="fullbody">
+            <button class="gallery__btn" aria-label="Open photo: leather armchair, lounge">
+              <img loading="lazy" width="800" height="1000" src="pyramid-armchair.jpg" data-photo="pyramid-armchair" style="--pos:50% 40%"
+                   alt="Rohit Sharma in a green checked shirt and jeans seated in a leather armchair, hand at his chin, gold hieroglyph wall behind">
+            </button>
+          </li>
+
+          <li class="gallery__item" data-category="business">
+            <button class="gallery__btn" aria-label="Open photo: suit in front of country flags">
+              <img loading="lazy" width="800" height="1000" src="flags-suit.jpg" data-photo="flags-suit" style="--pos:50% 40%"
+                   alt="Rohit Sharma in a black suit standing before a wall of participating-country flags">
+            </button>
+          </li>
+
+          <li class="gallery__item" data-category="business">
+            <button class="gallery__btn" aria-label="Open photo: suit, mirror shot">
+              <img loading="lazy" width="800" height="1000" src="suit-mirror.jpg" data-photo="suit-mirror" style="--pos:50% 30%"
+                   alt="Rohit Sharma in a dark suit and tie with a delegate badge, taking a mirror photo">
+            </button>
+          </li>
+
+          <li class="gallery__item" data-category="fitness">
             <button class="gallery__btn" aria-label="Open photo: locker room, jersey and headphones">
-              <img loading="lazy" width="800" height="1000" src="fullbody-2.jpeg" style="--pos:50% 30%"
+              <img loading="lazy" width="800" height="1000" src="locker-jersey.jpg" data-photo="locker-jersey" style="--pos:50% 30%"
                    alt="Rohit Sharma in a white sleeveless jersey and black headphones against grey lockers">
             </button>
           </li>
+
+          <li class="gallery__item" data-category="fitness">
+            <button class="gallery__btn" aria-label="Open photo: gym mirror, black and white">
+              <img loading="lazy" width="800" height="1000" src="gym-mirror.jpg" data-photo="gym-mirror" style="--pos:50% 40%"
+                   alt="Black and white gym mirror photo of Rohit Sharma with one arm raised and a phone covering his face">
+            </button>
+          </li>
+
+          <li class="gallery__item" data-category="fitness">
+            <button class="gallery__btn" aria-label="Open photo: gym, back view">
+              <img loading="lazy" width="800" height="1000" src="gym-back.jpg" data-photo="gym-back" style="--pos:50% 40%"
+                   alt="Back view of Rohit Sharma shirtless in a home gym beside a bench">
+            </button>
+          </li>
+
         </ul>
 
         <div class="gallery__more">
