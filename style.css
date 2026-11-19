@@ -278,3 +278,9 @@ h2 em, .hero__title em { font-style: italic; color: var(--accent); }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .js .reveal { opacity: 1; transform: none; }
 }
+
+/* ---------- Fallbacks: guarantee readable colors ---------- */
+html, body { background: #0f1211; color: #f2eee5; }
+h1, h2, h3, dd, label { color: #f2eee5; }
+.lead, .hero__loc, .timeline__item p, .footer { color: #b7bdb5; }
+.eyebrow, .stats__card dt, .contact__label { color: #d6a15e; }
