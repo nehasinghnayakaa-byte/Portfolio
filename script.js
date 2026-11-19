@@ -211,7 +211,7 @@
     var url = IG_REEL_URL.split('?')[0];
     igWrap.innerHTML =
       '<blockquote class="instagram-media" data-instgrm-permalink="' + url + '?utm_source=ig_embed&amp;utm_campaign=loading" ' +
-      'data-instgrm-version="14" style="background:#fff;border:0;border-radius:6px;margin:0 auto;max-width:540px;min-width:280px;padding:0;width:100%;">' +
+      'data-instgrm-version="14" style="background:#fff;border:0;border-radius:6px;margin:0 auto;max-width:326px;min-width:280px;padding:0;width:100%;">' +
       '<a href="' + url + '" target="_blank" rel="noopener">Watch the Kesh Vapsi advertisement on Instagram</a></blockquote>';
 
     if (window.instgrm && window.instgrm.Embeds) { window.instgrm.Embeds.process(); return; }
