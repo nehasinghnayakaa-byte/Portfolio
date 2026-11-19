@@ -67,19 +67,21 @@
     $$('main section[id]').forEach(function (s) { spy.observe(s); });
   }
 
-  /* ---------- 4. Scroll reveal ---------- */
+ 
+    /* ---------- 4. Scroll reveal (with failsafe) ---------- */
   var revealEls = $$('.reveal');
+  function showAll() { revealEls.forEach(function (el) { el.classList.add('is-visible'); }); }
+
   if (hasIO) {
+    document.documentElement.classList.add('reveal-ready');
     var revealer = new IntersectionObserver(function (entries, obs) {
       entries.forEach(function (en) {
         if (en.isIntersecting) { en.target.classList.add('is-visible'); obs.unobserve(en.target); }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.05 });
     revealEls.forEach(function (el) { revealer.observe(el); });
-  } else {
-    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+    setTimeout(showAll, 2500);   // failsafe: nothing stays hidden
   }
-
   /* ---------- 5. Gallery filter + "Show more" ---------- */
   var filterBtns = $$('.filters__btn');
   var tiles = $$('.gallery__item');
