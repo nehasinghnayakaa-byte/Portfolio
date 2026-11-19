@@ -15,7 +15,7 @@
     whatsapp: '917494907991'              // country code + number, digits only
   };
 
-  // PASTE THE KESH VAPSI REEL LINK HERE, e.g. 'https://www.instagram.com/p/DdwKUHtk8yR/'
+  // PASTE THE KESH VAPSI REEL LINK HERE, e.g. 'https://www.instagram.com/reel/AbCdEfGh123/'
   var IG_REEL_URL = 'https://www.instagram.com/p/DdwKUHtk8yR/';
   var IG_PROFILE_URL = 'https://www.instagram.com/rohit_sharmadra/';
 
@@ -212,7 +212,7 @@
     igWrap.innerHTML =
       '<blockquote class="instagram-media" data-instgrm-permalink="' + url + '?utm_source=ig_embed&amp;utm_campaign=loading" ' +
       'data-instgrm-version="14" style="background:#fff;border:0;border-radius:6px;margin:0 auto;max-width:540px;min-width:280px;padding:0;width:100%;">' +
-      '<a href="' + url + '" target="_blank" rel="noopener">Watch the Keshkanti advertisement on Instagram</a></blockquote>';
+      '<a href="' + url + '" target="_blank" rel="noopener">Watch the Kesh Vapsi advertisement on Instagram</a></blockquote>';
 
     if (window.instgrm && window.instgrm.Embeds) { window.instgrm.Embeds.process(); return; }
     var s = document.createElement('script');
