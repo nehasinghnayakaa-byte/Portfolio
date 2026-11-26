@@ -147,27 +147,102 @@ h2 em, .hero__title em { font-style: italic; color: var(--accent); }
 .stats__card dt { font-size: .62rem; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); }
 .stats__card dd { font-family: var(--serif); font-size: 1.45rem; line-height: 1.1; }
 
-/* ---------- 7. Portfolio gallery (equal tiles, 3 per row) ---------- */
-.filters { display: flex; flex-wrap: wrap; gap: .4rem; }
+/* ---------- 7. Portfolio gallery ---------- */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+}
+
 .filters__btn {
-  cursor: pointer; background: transparent; color: var(--ink-soft); border: 1px solid var(--line); border-radius: 999px;
-  font-family: var(--sans); font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; padding: .5rem .95rem;
+  cursor: pointer;
+  background: transparent;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: .68rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  padding: .5rem .95rem;
   transition: color .25s, border-color .25s, background .25s;
 }
-.filters__btn:hover { color: var(--ink); border-color: var(--ink-soft); }
-.filters__btn.is-active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 
-/* Phones: 2 per row. From 640px up: always 3 per row. */
-.gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: .6rem; }
-.gallery__item { margin: 0; }
-.gallery__item[hidden] { display: none !important; }
-.gallery__item.is-pop { animation: pop .5s var(--ease) both; }
-@keyframes pop { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
+.filters__btn:hover {
+  color: var(--ink);
+  border-color: var(--ink-soft);
+}
 
-.gallery__btn { display: block; width: 100%; padding: 0; border: 0; cursor: zoom-in; overflow: hidden; border-radius: var(--radius); background: var(--surface-2); box-shadow: var(--shadow); }
-/* Every tile is exactly 3:4. --pos (set per photo in the HTML) picks the part that stays visible. */
-.gallery__btn img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; object-position: var(--pos, center top); transition: transform .8s var(--ease), filter .4s; filter: saturate(.92); }
-.gallery__btn:hover img, .gallery__btn:focus-visible img { transform: scale(1.05); filter: saturate(1.05); }
+.filters__btn.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* One photo per row on every screen size */
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.gallery__item {
+  margin: 0;
+  width: 100%;
+}
+
+.gallery__item[hidden] {
+  display: none !important;
+}
+
+.gallery__item.is-pop {
+  animation: pop .5s var(--ease) both;
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.gallery__btn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  cursor: zoom-in;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  box-shadow: var(--shadow);
+}
+
+/*
+  Each photo gets its own row.
+  The original --pos values from your HTML are preserved.
+*/
+.gallery__btn img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: var(--pos, center top);
+  transition: transform .8s var(--ease), filter .4s;
+  filter: saturate(.92);
+}
+
+.gallery__btn:hover img,
+.gallery__btn:focus-visible img {
+  transform: scale(1.02);
+  filter: saturate(1.05);
+}
 
 /* ---------- 8. Featured work (Instagram link) ---------- */
 .featured { display: block; }
@@ -246,8 +321,9 @@ h2 em, .hero__title em { font-style: italic; color: var(--accent); }
 
 /* ---------- 14. Breakpoints (mobile-first) ---------- */
 @media (min-width: 640px) {
-  .gallery { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-  .stats { grid-template-columns: repeat(4, 1fr); }
+  .stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 @media (min-width: 820px) {
