@@ -15,6 +15,71 @@
 
   <link rel="stylesheet" href="style.css">
 
+  <style>
+    /* Balanced medium sizing and clean alignment for profile cards and gallery photos */
+    .hero__photo {
+      max-width: 420px;
+      margin-inline: auto;
+    }
+
+    .hero__photo img {
+      width: 100%;
+      max-height: 520px;
+      object-fit: cover;
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      align-items: start;
+    }
+
+    .profile-card--full {
+      grid-column: 1 / -1;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .gallery__btn {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      max-height: 360px;
+      overflow: hidden;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .gallery__btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: var(--pos, 50% 35%);
+    }
+
+    @media (max-width: 900px) {
+      .profile-grid {
+        grid-template-columns: 1fr;
+      }
+      .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -60,7 +125,7 @@
     <section class="hero" id="home" aria-labelledby="heroTitle">
       <div class="container hero__grid">
         <figure class="hero__photo">
-          <img src="WhatsApp%20Image%202026-11-26%20at%2012.27.06%20PM.jpeg" width="900" height="1600" fetchpriority="high" style="object-position:50% 18%"
+          <img src="WhatsApp Image 2026-11-26 at 12.27.06 PM.jpeg" width="900" height="1600" fetchpriority="high" style="object-position:50% 18%"
                alt="Rohit Sharma in a navy polo shirt and cream trousers, arms crossed, leaning against a grey block">
           <span class="chip"><b class="chip__dot"></b> Open for bookings</span>
         </figure>
@@ -108,93 +173,94 @@
     </section>
 
     <!-- ============ PROFESSIONAL PROFILE ============ -->
-<section class="section" id="profile" aria-labelledby="profileTitle">
-  <div class="container">
+    <section class="section" id="profile" aria-labelledby="profileTitle">
+      <div class="container">
 
-    <div class="section__head reveal">
-      <div>
-        <p class="eyebrow">Professional Profile</p>
-        <h2 id="profileTitle">Model <em>details</em></h2>
+        <div class="section__head reveal">
+          <div>
+            <p class="eyebrow">Professional Profile</p>
+            <h2 id="profileTitle">Model <em>details</em></h2>
+          </div>
+        </div>
+
+        <!-- PROFILE DETAILS -->
+        <div class="profile-grid reveal">
+
+          <!-- 1st Box: Professional Details -->
+          <div class="profile-card">
+            <h3>Professional Details</h3>
+
+            <dl class="profile-list">
+              <div><dt>Name</dt><dd>Rohit Sharma</dd></div>
+              <div><dt>City</dt><dd>Karnal, Haryana</dd></div>
+              <div><dt>Current City</dt><dd>Karnal, Haryana</dd></div>
+              <div><dt>Height</dt><dd>6 ft</dd></div>
+              <div><dt>Weight</dt><dd>—</dd></div>
+              <div><dt>Marital Status</dt><dd>—</dd></div>
+              <div><dt>Age</dt><dd>—</dd></div>
+              <div><dt>Breast / Chest</dt><dd>—</dd></div>
+              <div><dt>Waist</dt><dd>—</dd></div>
+              <div><dt>Complexion</dt><dd>—</dd></div>
+              <div><dt>Eye Colour</dt><dd>Brown</dd></div>
+              <div><dt>Hair Colour</dt><dd>Black</dd></div>
+              <div><dt>Hair Style</dt><dd>—</dd></div>
+              <div><dt>Shoe Size</dt><dd>—</dd></div>
+              <div><dt>Prints / Catalog</dt><dd>—</dd></div>
+              <div><dt>Ramps</dt><dd>—</dd></div>
+              <div><dt>Traditional Wear</dt><dd>—</dd></div>
+              <div><dt>Western Wear</dt><dd>—</dd></div>
+              <div><dt>Short Dress</dt><dd>—</dd></div>
+              <div><dt>Casual Wear</dt><dd>—</dd></div>
+              <div><dt>Jewellery</dt><dd>—</dd></div>
+              <div><dt>Sports Wear</dt><dd>—</dd></div>
+              <div><dt>Serials</dt><dd>—</dd></div>
+              <div><dt>Movie</dt><dd>—</dd></div>
+              <div><dt>Video Album</dt><dd>—</dd></div>
+              <div><dt>Contact / WhatsApp</dt><dd>+91 74949 07991</dd></div>
+              <div><dt>Email ID</dt><dd>sharmarohit98969@gmail.com</dd></div>
+            </dl>
+          </div>
+
+          <!-- 2nd Box: Personal & Professional -->
+          <div class="profile-card">
+            <h3>Personal &amp; Professional</h3>
+
+            <dl class="profile-list">
+              <div><dt>Name</dt><dd>Rohit Sharma</dd></div>
+              <div><dt>Age</dt><dd>—</dd></div>
+              <div><dt>Height</dt><dd>6 ft</dd></div>
+              <div><dt>Weight</dt><dd>—</dd></div>
+              <div><dt>Eyes</dt><dd>Brown</dd></div>
+              <div><dt>Hair</dt><dd>Black</dd></div>
+              <div><dt>Skin Colour</dt><dd>—</dd></div>
+              <div><dt>Shoe Size</dt><dd>—</dd></div>
+              <div><dt>Mobile Number</dt><dd>+91 74949 07991</dd></div>
+              <div><dt>Instagram ID</dt><dd>@rohit_sharmadra</dd></div>
+              <div><dt>My Moj &amp; Josh App ID</dt><dd>—</dd></div>
+              <div><dt>Address</dt><dd>Karnal, Haryana, India</dd></div>
+              <div><dt>Education</dt><dd>—</dd></div>
+              <div><dt>Interests</dt><dd>—</dd></div>
+            </dl>
+          </div>
+
+          <!-- 3rd Box: Personal Information (aligned below Personal & Professional) -->
+          <div class="profile-card profile-card--full">
+            <h3>Personal Information</h3>
+
+            <dl class="profile-list">
+              <div><dt>Mother Name</dt><dd>—</dd></div>
+              <div><dt>Father Name</dt><dd>—</dd></div>
+              <div><dt>DOB</dt><dd>—</dd></div>
+              <div><dt>Gender</dt><dd>Male</dd></div>
+              <div><dt>Nationality</dt><dd>Indian</dd></div>
+              <div><dt>Languages</dt><dd>—</dd></div>
+            </dl>
+          </div>
+
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- PROFILE DETAILS -->
-    <div class="profile-grid reveal">
-
-      <!-- 1st Professional Profile -->
-      <div class="profile-card">
-        <h3>Professional Details</h3>
-
-        <dl class="profile-list">
-          <div><dt>Name</dt><dd>Rohit Sharma</dd></div>
-          <div><dt>City</dt><dd>Karnal, Haryana</dd></div>
-          <div><dt>Current City</dt><dd>Karnal, Haryana</dd></div>
-          <div><dt>Height</dt><dd>6 ft</dd></div>
-          <div><dt>Weight</dt><dd>—</dd></div>
-          <div><dt>Marital Status</dt><dd>—</dd></div>
-          <div><dt>Age</dt><dd>—</dd></div>
-          <div><dt>Breast / Chest</dt><dd>—</dd></div>
-          <div><dt>Waist</dt><dd>—</dd></div>
-          <div><dt>Complexion</dt><dd>—</dd></div>
-          <div><dt>Eye Colour</dt><dd>Brown</dd></div>
-          <div><dt>Hair Colour</dt><dd>Black</dd></div>
-          <div><dt>Hair Style</dt><dd>—</dd></div>
-          <div><dt>Shoe Size</dt><dd>—</dd></div>
-          <div><dt>Prints / Catalog</dt><dd>—</dd></div>
-          <div><dt>Ramps</dt><dd>—</dd></div>
-          <div><dt>Traditional Wear</dt><dd>—</dd></div>
-          <div><dt>Western Wear</dt><dd>—</dd></div>
-          <div><dt>Short Dress</dt><dd>—</dd></div>
-          <div><dt>Casual Wear</dt><dd>—</dd></div>
-          <div><dt>Jewellery</dt><dd>—</dd></div>
-          <div><dt>Sports Wear</dt><dd>—</dd></div>
-          <div><dt>Serials</dt><dd>—</dd></div>
-          <div><dt>Movie</dt><dd>—</dd></div>
-          <div><dt>Video Album</dt><dd>—</dd></div>
-          <div><dt>Contact / WhatsApp</dt><dd>+91 74949 07991</dd></div>
-          <div><dt>Email ID</dt><dd>sharmarohit98969@gmail.com</dd></div>
-        </dl>
-      </div>
-
-      <!-- 2nd Professional Profile -->
-      <div class="profile-card">
-        <h3>Personal &amp; Professional</h3>
-
-        <dl class="profile-list">
-          <div><dt>Name</dt><dd>Rohit Sharma</dd></div>
-          <div><dt>Age</dt><dd>—</dd></div>
-          <div><dt>Height</dt><dd>6 ft</dd></div>
-          <div><dt>Weight</dt><dd>—</dd></div>
-          <div><dt>Eyes</dt><dd>Brown</dd></div>
-          <div><dt>Hair</dt><dd>Black</dd></div>
-          <div><dt>Skin Colour</dt><dd>—</dd></div>
-          <div><dt>Shoe Size</dt><dd>—</dd></div>
-          <div><dt>Mobile Number</dt><dd>+91 74949 07991</dd></div>
-          <div><dt>Instagram ID</dt><dd>@rohit_sharmadra</dd></div>
-          <div><dt>My Moj &amp; Josh App ID</dt><dd>—</dd></div>
-          <div><dt>Address</dt><dd>Karnal, Haryana, India</dd></div>
-          <div><dt>Education</dt><dd>—</dd></div>
-          <div><dt>Interests</dt><dd>—</dd></div>
-        </dl>
-      </div>
-
-      <!-- 3rd Professional Profile -->
-      <div class="profile-card">
-        <h3>Personal Information</h3>
-
-        <dl class="profile-list">
-          <div><dt>Mother Name</dt><dd>—</dd></div>
-          <div><dt>Father Name</dt><dd>—</dd></div>
-          <div><dt>DOB</dt><dd>—</dd></div>
-          <div><dt>Gender</dt><dd>Male</dd></div>
-          <div><dt>Nationality</dt><dd>Indian</dd></div>
-          <div><dt>Languages</dt><dd>—</dd></div>
-        </dl>
-      </div>
-
-    </div>
-  </div>
-</section>
     <!-- ============ PORTFOLIO ============ -->
     <section class="section section--alt" id="portfolio" aria-labelledby="portfolioTitle">
       <div class="container">
@@ -213,120 +279,113 @@
           </div>
         </div>
 
-        <!--
-          20 photos, 3 per row, all tiles the same size.
-          data-category = which filter button shows it.
-          --pos = which part of the photo stays visible inside the tile (x% y%).
-          To remove a photo, delete its whole <li>...</li> block.
-        -->
         <ul class="gallery" id="gallery">
 
           <li class="gallery__item" data-category="editorial">
             <button class="gallery__btn" type="button" aria-label="View photo full screen">
-              <img src="WhatsApp%20Image%202026-11-25%20at%2012.49.32%20PM.jpeg" alt="Rohit in a black leather jacket against a tan backdrop" style="--pos:50% 40%" loading="lazy" decoding="async">
+              <img src="WhatsApp Image 2026-11-25 at 12.49.32 PM.jpeg" alt="Rohit in a black leather jacket against a tan backdrop" style="--pos:50% 40%" loading="lazy" decoding="async">
             </button>
           </li>
 
           <li class="gallery__item" data-category="portrait">
             <button class="gallery__btn" type="button" aria-label="View photo full screen">
-              <img src="WhatsApp%20Image%202026-11-25%20at%201.36.40%20PM.jpeg" alt="Rohit in a black leather jacket, looking to the side" style="--pos:50% 45%" loading="lazy" decoding="async">
+              <img src="WhatsApp Image 2026-11-25 at 1.36.40 PM.jpeg" alt="Rohit in a black leather jacket, looking to the side" style="--pos:50% 45%" loading="lazy" decoding="async">
             </button>
           </li>
 
           <li class="gallery__item" data-category="portrait">
             <button class="gallery__btn" type="button" aria-label="View photo full screen">
-              <img src="WhatsApp%20Image%202026-11-25%20at%201.39.59%20PM.jpeg" alt="Rohit seated in a green checked shirt, hand on chin" style="--pos:50% 38%" loading="lazy" decoding="async">
+              <img src="WhatsApp Image 2026-11-25 at 1.39.59 PM.jpeg" alt="Rohit seated in a green checked shirt, hand on chin" style="--pos:50% 38%" loading="lazy" decoding="async">
             </button>
           </li>
 
           <li class="gallery__item" data-category="editorial">
             <button class="gallery__btn" type="button" aria-label="View photo full screen">
-              <img src="WhatsApp%20Image%202026-11-25%20at%202.33.16%20PM.jpeg" alt="Rohit relaxing on a sofa in a green checked shirt" style="--pos:50% 35%" loading="lazy" decoding="async">
+              <img src="WhatsApp Image 2026-11-25 at 2.33.16 PM.jpeg" alt="Rohit relaxing on a sofa in a green checked shirt" style="--pos:50% 35%" loading="lazy" decoding="async">
             </button>
           </li>
 
           <li class="gallery__item" data-category="portrait">
             <button class="gallery__btn" type="button" aria-label="View photo full screen">
-              <img src="WhatsApp%20Image%202026-11-25%20at%202.37.17%20PM.jpeg" alt="Rohit in a green checked shirt against a plum backdrop" style="--pos:50% 38%" loading="lazy" decoding="async">
+              <img src="WhatsApp Image 2026-11-25 at 2.37.17 PM.jpeg" alt="Rohit in a green checked shirt against a plum backdrop" style="--pos:50% 38%" loading="lazy" decoding="async">
             </button>
           </li>
 
           <li class="gallery__item" data-category="business">
             <button class="gallery__btn" type="button" aria-label="View photo full screen">
-              <img src="WhatsApp%20Image%202026-11-25%20at%202.53.49%20PM.jpeg" alt="Rohit in a black suit and tie, walking" style="--pos:50% 50%" loading="lazy" decoding="async">
+              <img src="WhatsApp Image 2026-11-25 at 2.53.49 PM.jpeg" alt="Rohit in a black suit and tie, walking" style="--pos:50% 50%" loading="lazy" decoding="async">
             </button>
           </li>
 
           <li class="gallery__item" data-category="portrait">
             <button class="gallery__btn" type="button" aria-label="View photo full screen">
-              <img src="WhatsApp%20Image%202026-11-25%20at%202.59.20%20PM.jpeg" alt="Rohit in a red sweatshirt and sunglasses" style="--pos:40% 50%" loading="lazy" decoding="async">
+              <img src="WhatsApp Image 2026-11-25 at 2.59.20 PM.jpeg" alt="Rohit in a red sweatshirt and sunglasses" style="--pos:40% 50%" loading="lazy" decoding="async">
             </button>
           </li>
 
           <li class="gallery__item" data-category="fullbody">
             <button class="gallery__btn" type="button" aria-label="View photo full screen">
-              <img src="WhatsApp%20Image%202026-11-25%20at%203.03.53%20PM.jpeg" alt="Rohit in a black mandarin-collar shirt and cream trousers" style="--pos:50% 20%" loading="lazy" decoding="async">
+              <img src="WhatsApp Image 2026-11-25 at 3.03.53 PM.jpeg" alt="Rohit in a black mandarin-collar shirt and cream trousers" style="--pos:50% 20%" loading="lazy" decoding="async">
             </button>
           </li>
 
           <li class="gallery__item" data-category="fullbody">
             <button class="gallery__btn" type="button" aria-label="View photo full screen">
-              <img src="WhatsApp%20Image%202026-11-25%20at%203.09.06%20PM.jpeg" alt="Rohit in a black T-shirt and cargo jeans" style="--pos:48% 50%" loading="lazy" decoding="async">
+              <img src="WhatsApp Image 2026-11-25 at 3.09.06 PM.jpeg" alt="Rohit in a black T-shirt and cargo jeans" style="--pos:48% 50%" loading="lazy" decoding="async">
             </button>
           </li>
 
           <li class="gallery__item" data-category="fitness">
             <button class="gallery__btn" type="button" aria-label="View photo full screen">
-              <img src="WhatsApp%20Image%202026-11-25%20at%203.12.35%20PM.jpeg" alt="Rohit in a black athletic tank top" style="--pos:62% 50%" loading="lazy" decoding="async">
+              <img src="WhatsApp Image 2026-11-25 at 3.12.35 PM.jpeg" alt="Rohit in a black athletic tank top" style="--pos:62% 50%" loading="lazy" decoding="async">
             </button>
           </li>
 
           <li class="gallery__item" data-category="business">
             <button class="gallery__btn" type="button" aria-label="View photo full screen">
-              <img src="WhatsApp%20Image%202026-11-25%20at%203.15.25%20PM.jpeg" alt="Rohit in a black suit against a blue backdrop" style="--pos:50% 50%" loading="lazy" decoding="async">
+              <img src="WhatsApp Image 2026-11-25 at 3.15.25 PM.jpeg" alt="Rohit in a black suit against a blue backdrop" style="--pos:50% 50%" loading="lazy" decoding="async">
             </button>
           </li>
 
           <li class="gallery__item" data-category="business">
             <button class="gallery__btn" type="button" aria-label="View photo full screen">
-              <img src="WhatsApp%20Image%202026-11-25%20at%203.15.36%20PM.jpeg" alt="Rohit in a black suit against a taupe backdrop" style="--pos:50% 50%" loading="lazy" decoding="async">
+              <img src="WhatsApp Image 2026-11-25 at 3.15.36 PM.jpeg" alt="Rohit in a black suit against a taupe backdrop" style="--pos:50% 50%" loading="lazy" decoding="async">
             </button>
           </li>
 
           <li class="gallery__item" data-category="portrait">
             <button class="gallery__btn" type="button" aria-label="View photo full screen">
-              <img src="WhatsApp%20Image%202026-11-25%20at%203.17.57%20PM.jpeg" alt="Rohit wearing a blue polo shirt, profile view" style="--pos:50% 28%" loading="lazy" decoding="async">
+              <img src="WhatsApp Image 2026-11-25 at 3.17.57 PM.jpeg" alt="Rohit wearing a blue polo shirt, profile view" style="--pos:50% 28%" loading="lazy" decoding="async">
             </button>
           </li>
 
           <li class="gallery__item" data-category="editorial">
             <button class="gallery__btn" type="button" aria-label="View photo full screen">
-              <img src="WhatsApp%20Image%202026-11-25%20at%203.32.17%20PM.jpeg" alt="Rohit in a red sweatshirt and sunglasses, low-angle shot" style="--pos:50% 70%" loading="lazy" decoding="async">
+              <img src="WhatsApp Image 2026-11-25 at 3.32.17 PM.jpeg" alt="Rohit in a red sweatshirt and sunglasses, low-angle shot" style="--pos:50% 70%" loading="lazy" decoding="async">
             </button>
           </li>
 
           <li class="gallery__item" data-category="fullbody">
             <button class="gallery__btn" type="button" aria-label="View photo full screen">
-              <img src="WhatsApp%20Image%202026-11-25%20at%203.32.27%20PM.jpeg" alt="Rohit in a leather jacket and black cargo trousers, side pose" style="--pos:62% 40%" loading="lazy" decoding="async">
+              <img src="WhatsApp Image 2026-11-25 at 3.32.27 PM.jpeg" alt="Rohit in a leather jacket and black cargo trousers, side pose" style="--pos:62% 40%" loading="lazy" decoding="async">
             </button>
           </li>
 
           <li class="gallery__item" data-category="fitness">
             <button class="gallery__btn" type="button" aria-label="View photo full screen">
-              <img src="WhatsApp%20Image%202026-11-25%20at%203.35.48%20PM.jpeg" alt="Rohit in a white athletic jersey and headphones, blue backdrop" style="--pos:40% 25%" loading="lazy" decoding="async">
-            </button>
-          </li>
-
-
-          <li class="gallery__item" data-category="editorial">
-            <button class="gallery__btn" type="button" aria-label="View photo full screen">
-              <img src="WhatsApp%20Image%202026-11-26%20at%2012.25.11%20PM.jpeg" alt="Rohit in a pale blue T-shirt reclining on a wooden bench" style="--pos:50% 45%" loading="lazy" decoding="async">
+              <img src="WhatsApp Image 2026-11-25 at 3.35.48 PM.jpeg" alt="Rohit in a white athletic jersey and headphones, blue backdrop" style="--pos:40% 25%" loading="lazy" decoding="async">
             </button>
           </li>
 
           <li class="gallery__item" data-category="editorial">
             <button class="gallery__btn" type="button" aria-label="View photo full screen">
-              <img src="WhatsApp%20Image%202026-11-26%20at%2012.27.06%20PM.jpeg" alt="Rohit in a navy polo shirt and cream trousers, arms crossed" style="--pos:50% 22%" loading="lazy" decoding="async">
+              <img src="WhatsApp Image 2026-11-26 at 12.25.11 PM.jpeg" alt="Rohit in a pale blue T-shirt reclining on a wooden bench" style="--pos:50% 45%" loading="lazy" decoding="async">
+            </button>
+          </li>
+
+          <li class="gallery__item" data-category="editorial">
+            <button class="gallery__btn" type="button" aria-label="View photo full screen">
+              <img src="WhatsApp Image 2026-11-26 at 12.27.06 PM.jpeg" alt="Rohit in a navy polo shirt and cream trousers, arms crossed" style="--pos:50% 22%" loading="lazy" decoding="async">
             </button>
           </li>
 
