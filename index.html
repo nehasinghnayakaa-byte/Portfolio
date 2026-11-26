@@ -70,22 +70,25 @@
       font-weight: 500;
     }
 
-    /* Single-column wide photo frames beneath the filter bar */
-    .gallery {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
+    /* Force single-column vertical stack: PHOTO 1, below it PHOTO 2, below that PHOTO 3 */
+    ul.gallery#gallery {
+      display: flex !important;
+      flex-direction: column !important;
+      grid-template-columns: none !important;
+      gap: 24px !important;
       max-width: 720px;
       margin: 24px auto 0;
       padding: 0;
       list-style: none;
     }
 
-    .gallery__item {
-      width: 100%;
+    ul.gallery#gallery > .gallery__item {
+      width: 100% !important;
+      max-width: 100% !important;
+      grid-column: auto !important;
     }
 
-    .gallery__btn {
+    ul.gallery#gallery > .gallery__item .gallery__btn {
       display: block;
       width: 100%;
       height: 360px;
@@ -97,7 +100,7 @@
       cursor: pointer;
     }
 
-    .gallery__btn img {
+    ul.gallery#gallery > .gallery__item .gallery__btn img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -111,7 +114,7 @@
     }
 
     @media (max-width: 600px) {
-      .gallery__btn {
+      ul.gallery#gallery > .gallery__item .gallery__btn {
         height: 280px;
       }
     }
