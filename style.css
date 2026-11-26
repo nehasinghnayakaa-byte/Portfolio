@@ -147,6 +147,59 @@ h2 em, .hero__title em { font-style: italic; color: var(--accent); }
 .stats__card dt { font-size: .62rem; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); }
 .stats__card dd { font-family: var(--serif); font-size: 1.45rem; line-height: 1.1; }
 
+/* ---------- Professional Profile ---------- */
+
+.profile-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.profile-card {
+  padding: 1.3rem;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.profile-card h3 {
+  font-size: 1.7rem;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  padding-bottom: .8rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.profile-list {
+  display: grid;
+  gap: 0;
+}
+
+.profile-list > div {
+  display: grid;
+  grid-template-columns: minmax(120px, .8fr) 1.2fr;
+  gap: 1rem;
+  padding: .65rem 0;
+  border-bottom: 1px solid rgba(242, 238, 229, .08);
+}
+
+.profile-list > div:last-child {
+  border-bottom: 0;
+}
+
+.profile-list dt {
+  font-size: .62rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.profile-list dd {
+  font-family: var(--sans);
+  font-size: .9rem;
+  color: var(--ink-soft);
+  overflow-wrap: anywhere;
+}
+
 /* ---------- 7. Portfolio gallery ---------- */
 .filters {
   display: flex;
