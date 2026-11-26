@@ -380,6 +380,11 @@ h2 em, .hero__title em { font-style: italic; color: var(--accent); }
 }
 
 @media (min-width: 820px) {
+
+   .profile-grid {
+  grid-template-columns: repeat(2, 1fr);
+  align-items: start;
+}
   :root { --header-h: 68px; }
   .section { padding: 3.5rem 0; }
   .section__head { flex-direction: row; justify-content: space-between; align-items: flex-end; }
