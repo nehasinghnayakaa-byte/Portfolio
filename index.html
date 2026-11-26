@@ -15,24 +15,6 @@
 
   <link rel="stylesheet" href="style.css">
 
-  <!-- Image extension fallback: if "photo.jpg" is missing, try .jpeg, .png, .webp and doubled extensions.
-       Only images with a data-photo attribute are affected. -->
-  <script>
-  (function () {
-    var EXT = ['jpg', 'jpeg', 'png', 'webp', 'jpg.jpg', 'jpg.jpeg', 'jpg.png', 'jpeg.jpeg', 'jpeg.jpg', 'png.png', 'png.jpg', 'JPG', 'JPEG', 'PNG'];
-    document.addEventListener('error', function (e) {
-      var img = e.target;
-      if (!img || img.tagName !== 'IMG' || !img.hasAttribute('data-photo')) return;
-      var n = +(img.getAttribute('data-try') || 1);   // src already tried EXT[0]
-      if (n < EXT.length) {
-        e.stopImmediatePropagation();                 // hide the failure until every option is tried
-        img.setAttribute('data-try', n + 1);
-        img.src = img.getAttribute('data-photo') + '.' + EXT[n];
-      }
-    }, true);
-  })();
-  </script>
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -73,8 +55,8 @@
     <section class="hero" id="home" aria-labelledby="heroTitle">
       <div class="container hero__grid">
         <figure class="hero__photo">
-          <img src="hero.jpg.jpeg" data-photo="hero" width="844" height="1055" fetchpriority="high" style="object-position:50% 15%"
-               alt="Rohit Sharma in a navy polo shirt and cream trousers, arms crossed, leaning against a wooden wardrobe">
+          <img src="WhatsApp%20Image%202026-11-26%20at%2012.27.06%20PM.jpeg" width="844" height="1055" fetchpriority="high" style="object-position:50% 15%"
+               alt="Rohit Sharma in a navy polo shirt and cream trousers, arms crossed, leaning against a grey block">
           <span class="chip"><b class="chip__dot"></b> Open for bookings</span>
         </figure>
 
@@ -93,7 +75,7 @@
       </div>
     </section>
 
-    <!-- ============ ABOUT (directly below hero) ============ -->
+    <!-- ============ ABOUT ============ -->
     <section class="section" id="about" aria-labelledby="aboutTitle">
       <div class="container about">
         <div class="reveal">
@@ -110,7 +92,6 @@
         </div>
       </div>
 
-      <!-- Compact measurements: horizontal stat cards -->
       <div class="container reveal" id="measurements">
         <dl class="stats" aria-label="Measurements">
           <div class="stats__card"><dt>Height</dt><dd>6 ft</dd></div>
@@ -139,147 +120,170 @@
           </div>
         </div>
 
-        <!--
-          GALLERY: 19 photos (the 20th, the navy polo, is the hero above).
-          src = base name + .jpg. data-photo = base name only (used by the extension fallback).
-          To remove a photo, delete its whole <li>...</li> block.
-          --pos controls which part stays visible when the photo is cropped to 4:5.
-        -->
-             <ul class="gallery" id="gallery">
+        <!-- 19 gallery photos. To remove one, delete its whole <li>...</li> block. -->
+        <ul class="gallery" id="gallery">
 
-  <!-- 01. Formal suit -->
-  <li class="tile tile--feature" data-category="fullbody">
-    <button class="tile-btn" type="button">
-      <img src="WhatsApp%20Image%202026-11-25%20at%202.53.49%20PM.jpeg"
-           alt="Rohit in a formal black suit" loading="lazy">
-      <span class="tile-meta"><i>01</i> Formal</span>
-    </button>
-  </li>
+          <!-- 01 -->
+          <li class="tile tile--feature" data-category="editorial">
+            <button class="tile-btn" type="button">
+              <img src="WhatsApp%20Image%202025-11-25%20at%2012.49.32%20PM.jpeg" alt="Rohit in a black leather jacket against a tan backdrop" loading="lazy">
+              <span class="tile-meta"><i>01</i> Editorial</span>
+            </button>
+          </li>
 
-  <!-- 02. Leather jacket portrait -->
-  <li class="tile" data-category="editorial">
-    <button class="tile-btn" type="button">
-      <img src="WhatsApp%20Image%202026-11-25%20at%201.36.40%20PM.jpeg"
-           alt="Rohit in a black leather jacket" loading="lazy">
-      <span class="tile-meta"><i>02</i> Editorial</span>
-    </button>
-  </li>
+          <!-- 02 -->
+          <li class="tile" data-category="portrait">
+            <button class="tile-btn" type="button">
+              <img src="WhatsApp%20Image%202026-11-25%20at%201.36.40%20PM.jpeg" alt="Rohit in a black leather jacket, looking to the side" loading="lazy">
+              <span class="tile-meta"><i>02</i> Portrait</span>
+            </button>
+          </li>
 
-  <!-- 03. Red sweatshirt -->
-  <li class="tile" data-category="headshot">
-    <button class="tile-btn" type="button">
-      <img src="WhatsApp%20Image%202026-11-25%20at%202.59.20%20PM.jpeg"
-           alt="Rohit in a red sweatshirt and sunglasses" loading="lazy">
-      <span class="tile-meta"><i>03</i> Fashion</span>
-    </button>
-  </li>
+          <!-- 03 -->
+          <li class="tile" data-category="portrait">
+            <button class="tile-btn" type="button">
+              <img src="WhatsApp%20Image%202026-11-25%20at%201.39.59%20PM.jpeg" alt="Rohit seated in a green checked shirt, hand on chin" loading="lazy">
+              <span class="tile-meta"><i>03</i> Portrait</span>
+            </button>
+          </li>
 
-  <!-- 04. Green checked shirt -->
-  <li class="tile" data-category="profile">
-    <button class="tile-btn" type="button">
-      <img src="WhatsApp%20Image%202026-11-25%20at%201.39.59%20PM.jpeg"
-           alt="Rohit in a green checked shirt" loading="lazy">
-      <span class="tile-meta"><i>04</i> Lifestyle</span>
-    </button>
-  </li>
+          <!-- 04 -->
+          <li class="tile" data-category="editorial">
+            <button class="tile-btn" type="button">
+              <img src="WhatsApp%20Image%202026-11-25%20at%202.33.16%20PM.jpeg" alt="Rohit relaxing on a sofa in a green checked shirt" loading="lazy">
+              <span class="tile-meta"><i>04</i> Editorial</span>
+            </button>
+          </li>
 
-  <!-- 05. Formal suit blue backdrop -->
-  <li class="tile" data-category="fullbody">
-    <button class="tile-btn" type="button">
-      <img src="WhatsApp%20Image%202026-11-25%20at%203.15.25%20PM.jpeg"
-           alt="Rohit in a black suit against a blue backdrop" loading="lazy">
-      <span class="tile-meta"><i>05</i> Formal</span>
-    </button>
-  </li>
+          <!-- 05 -->
+          <li class="tile" data-category="portrait">
+            <button class="tile-btn" type="button">
+              <img src="WhatsApp%20Image%202026-11-25%20at%202.37.17%20PM.jpeg" alt="Rohit in a green checked shirt against a plum backdrop" loading="lazy">
+              <span class="tile-meta"><i>05</i> Portrait</span>
+            </button>
+          </li>
 
-  <!-- 06. Leather jacket full-body -->
-  <li class="tile" data-category="editorial">
-    <button class="tile-btn" type="button">
-      <img src="WhatsApp%20Image%202026-11-25%20at%203.32.27%20PM.jpeg"
-           alt="Rohit in a black leather jacket, side pose" loading="lazy">
-      <span class="tile-meta"><i>06</i> Editorial</span>
-    </button>
-  </li>
+          <!-- 06 -->
+          <li class="tile" data-category="business">
+            <button class="tile-btn" type="button">
+              <img src="WhatsApp%20Image%202026-11-25%20at%202.53.49%20PM.jpeg" alt="Rohit in a black suit and tie, walking" loading="lazy">
+              <span class="tile-meta"><i>06</i> Business</span>
+            </button>
+          </li>
 
-  <!-- 07. Black T-shirt casual -->
-  <li class="tile" data-category="fullbody">
-    <button class="tile-btn" type="button">
-      <img src="WhatsApp%20Image%202026-11-25%20at%203.09.06%20PM.jpeg"
-           alt="Rohit in a black T-shirt and cargo jeans" loading="lazy">
-      <span class="tile-meta"><i>07</i> Casual</span>
-    </button>
-  </li>
+          <!-- 07 -->
+          <li class="tile" data-category="portrait">
+            <button class="tile-btn" type="button">
+              <img src="WhatsApp%20Image%202026-11-25%20at%202.59.20%20PM.jpeg" alt="Rohit in a red sweatshirt and sunglasses" loading="lazy">
+              <span class="tile-meta"><i>07</i> Portrait</span>
+            </button>
+          </li>
 
-  <!-- 08. Green checked shirt sofa -->
-  <li class="tile" data-category="profile">
-    <button class="tile-btn" type="button">
-      <img src="WhatsApp%20Image%202026-11-25%20at%202.33.16%20PM.jpeg"
-           alt="Rohit relaxing on a sofa in a green checked shirt" loading="lazy">
-      <span class="tile-meta"><i>08</i> Lifestyle</span>
-    </button>
-  </li>
+          <!-- 08 -->
+          <li class="tile" data-category="fullbody">
+            <button class="tile-btn" type="button">
+              <img src="WhatsApp%20Image%202026-11-25%20at%203.03.53%20PM.jpeg" alt="Rohit in a black mandarin-collar shirt and cream trousers" loading="lazy">
+              <span class="tile-meta"><i>08</i> Full-body</span>
+            </button>
+          </li>
 
-  <!-- 09. Green checked shirt chair -->
-  <li class="tile" data-category="profile">
-    <button class="tile-btn" type="button">
-      <img src="WhatsApp%20Image%202026-11-25%20at%202.37.17%20PM.jpeg"
-           alt="Rohit seated in a green checked shirt" loading="lazy">
-      <span class="tile-meta"><i>09</i> Lifestyle</span>
-    </button>
-  </li>
+          <!-- 09 -->
+          <li class="tile" data-category="fullbody">
+            <button class="tile-btn" type="button">
+              <img src="WhatsApp%20Image%202026-11-25%20at%203.09.06%20PM.jpeg" alt="Rohit in a black T-shirt and cargo jeans" loading="lazy">
+              <span class="tile-meta"><i>09</i> Full-body</span>
+            </button>
+          </li>
 
-  <!-- 10. Blue polo -->
-  <li class="tile" data-category="headshot">
-    <button class="tile-btn" type="button">
-      <img src="WhatsApp%20Image%202026-11-25%20at%203.17.57%20PM.jpeg"
-           alt="Rohit wearing a blue polo shirt" loading="lazy">
-      <span class="tile-meta"><i>10</i> Commercial</span>
-    </button>
-  </li>
+          <!-- 10 -->
+          <li class="tile" data-category="fitness">
+            <button class="tile-btn" type="button">
+              <img src="WhatsApp%20Image%202026-11-25%20at%203.12.35%20PM.jpeg" alt="Rohit in a black athletic tank top" loading="lazy">
+              <span class="tile-meta"><i>10</i> Fitness</span>
+            </button>
+          </li>
 
-  <!-- 11. Formal suit taupe backdrop -->
-  <li class="tile" data-category="fullbody">
-    <button class="tile-btn" type="button">
-      <img src="WhatsApp%20Image%202026-11-25%20at%203.15.36%20PM.jpeg"
-           alt="Rohit in a formal black suit against a taupe background" loading="lazy">
-      <span class="tile-meta"><i>11</i> Formal</span>
-    </button>
-  </li>
+          <!-- 11 -->
+          <li class="tile" data-category="business">
+            <button class="tile-btn" type="button">
+              <img src="WhatsApp%20Image%202026-11-25%20at%203.15.25%20PM.jpeg" alt="Rohit in a black suit against a blue backdrop" loading="lazy">
+              <span class="tile-meta"><i>11</i> Business</span>
+            </button>
+          </li>
 
-  <!-- 12. Fitness portrait -->
-  <li class="tile" data-category="headshot">
-    <button class="tile-btn" type="button">
-      <img src="WhatsApp%20Image%202026-11-25%20at%203.12.35%20PM.jpeg"
-           alt="Rohit in a black athletic tank top" loading="lazy">
-      <span class="tile-meta"><i>12</i> Fitness</span>
-    </button>
-  </li>
+          <!-- 12 -->
+          <li class="tile" data-category="business">
+            <button class="tile-btn" type="button">
+              <img src="WhatsApp%20Image%202026-11-25%20at%203.15.36%20PM.jpeg" alt="Rohit in a black suit against a taupe backdrop" loading="lazy">
+              <span class="tile-meta"><i>12</i> Business</span>
+            </button>
+          </li>
 
-  <!-- 13. Athletic jersey -->
-  <li class="tile" data-category="fullbody">
-    <button class="tile-btn" type="button">
-      <img src="WhatsApp%20Image%202026-11-25%20at%203.35.48%20PM.jpeg"
-           alt="Rohit wearing a white athletic jersey and headphones" loading="lazy">
-      <span class="tile-meta"><i>13</i> Athletic</span>
-    </button>
-  </li>
+          <!-- 13 -->
+          <li class="tile" data-category="portrait">
+            <button class="tile-btn" type="button">
+              <img src="WhatsApp%20Image%202026-11-25%20at%203.17.57%20PM.jpeg" alt="Rohit wearing a blue polo shirt, profile view" loading="lazy">
+              <span class="tile-meta"><i>13</i> Portrait</span>
+            </button>
+          </li>
 
-  <!-- 14. Red sweatshirt low-angle portrait -->
-  <li class="tile" data-category="headshot">
-    <button class="tile-btn" type="button">
-      <img src="WhatsApp%20Image%202026-11-25%20at%203.32.17%20PM.jpeg"
-           alt="Rohit in a red sweatshirt, low-angle portrait" loading="lazy">
-      <span class="tile-meta"><i>14</i> Editorial</span>
-    </button>
-  </li>
+          <!-- 14 -->
+          <li class="tile" data-category="fitness">
+            <button class="tile-btn" type="button">
+              <img src="WhatsApp%20Image%202026-11-25%20at%203.25.20%20PM.jpeg" alt="Rohit in a white athletic jersey and headphones by lockers" loading="lazy">
+              <span class="tile-meta"><i>14</i> Fitness</span>
+            </button>
+          </li>
 
-</ul>
+          <!-- 15 -->
+          <li class="tile" data-category="editorial">
+            <button class="tile-btn" type="button">
+              <img src="WhatsApp%20Image%202026-11-25%20at%203.32.17%20PM.jpeg" alt="Rohit in a red sweatshirt and sunglasses, low-angle shot" loading="lazy">
+              <span class="tile-meta"><i>15</i> Editorial</span>
+            </button>
+          </li>
+
+          <!-- 16 -->
+          <li class="tile" data-category="fullbody">
+            <button class="tile-btn" type="button">
+              <img src="WhatsApp%20Image%202026-11-25%20at%203.32.27%20PM.jpeg" alt="Rohit in a leather jacket and black cargo trousers, side pose" loading="lazy">
+              <span class="tile-meta"><i>16</i> Full-body</span>
+            </button>
+          </li>
+
+          <!-- 17 -->
+          <li class="tile" data-category="fitness">
+            <button class="tile-btn" type="button">
+              <img src="WhatsApp%20Image%202026-11-25%20at%203.35.48%20PM.jpeg" alt="Rohit in a white athletic jersey and headphones, blue backdrop" loading="lazy">
+              <span class="tile-meta"><i>17</i> Fitness</span>
+            </button>
+          </li>
+
+          <!-- 18 -->
+          <li class="tile" data-category="editorial">
+            <button class="tile-btn" type="button">
+              <img src="WhatsApp%20Image%202026-11-25%20at%203.43.56%20PM.jpeg" alt="Rohit seated on a blue sofa in a navy polo and cream trousers" loading="lazy">
+              <span class="tile-meta"><i>18</i> Editorial</span>
+            </button>
+          </li>
+
+          <!-- 19 -->
+          <li class="tile" data-category="editorial">
+            <button class="tile-btn" type="button">
+              <img src="WhatsApp%20Image%202026-11-26%20at%2012.25.11%20PM.jpeg" alt="Rohit in a pale blue T-shirt reclining on a wooden bench" loading="lazy">
+              <span class="tile-meta"><i>19</i> Editorial</span>
+            </button>
+          </li>
+
+        </ul>
+
         <div class="gallery__more">
           <button class="btn btn--ghost" id="galleryMore" aria-expanded="false">Show more</button>
         </div>
       </div>
     </section>
-    <!-- ============ FEATURED WORK (Instagram ad) ============    <!-- ============ FEATURED WORK (Instagram ad) ============ -->
+
+    <!-- ============ FEATURED WORK (Instagram ad) ============ -->
     <section class="section" id="featured" aria-labelledby="featuredTitle">
       <div class="container featured">
         <div class="reveal">
@@ -295,6 +299,7 @@
         </div>
       </div>
     </section>
+
     <!-- ============ EXPERIENCE ============ -->
     <section class="section section--alt" id="experience" aria-labelledby="experienceTitle">
       <div class="container container--narrow">
