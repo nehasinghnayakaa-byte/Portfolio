@@ -3,6 +3,7 @@
    Mobile-first, BEM naming
    ========================================================= */
 
+
 /* ---------- 1. Tokens ---------- */
 
 :root {
@@ -672,13 +673,6 @@ h2 em,
 
 /* =========================================================
    7. Portfolio Gallery
-
-   IMPORTANT:
-   - One photo per row
-   - Full photo visible
-   - No fixed image height
-   - No object-fit: cover
-   - No cropping
    ========================================================= */
 
 .filters {
@@ -730,9 +724,8 @@ h2 em,
 }
 
 
-/*
-   The gallery is deliberately a single vertical column.
-*/
+/* Vertical gallery */
+
 .gallery {
   display: flex;
 
@@ -768,23 +761,15 @@ h2 em,
 @keyframes pop {
   from {
     opacity: 0;
-
-    transform:
-      translateY(14px)
-      scale(.98);
+    transform: translateY(14px) scale(.98);
   }
 
   to {
     opacity: 1;
-
     transform: none;
   }
 }
 
-
-/*
-   DO NOT give this button a fixed height.
-*/
 .gallery__btn {
   display: block;
 
@@ -811,14 +796,6 @@ h2 em,
   line-height: 0;
 }
 
-
-/*
-   The image determines its own height based on its
-   original aspect ratio.
-
-   object-fit: contain is used as an additional safeguard,
-   but because height is auto, the image is never cropped.
-*/
 .gallery__btn img {
   display: block;
 
@@ -1126,40 +1103,146 @@ h2 em,
 }
 
 
-/* ---------- 11. Footer ---------- */
+/* =========================================================
+   11. FOOTER
+   ========================================================= */
 
 .footer {
-  padding: 1.4rem 0;
+  margin-top: 70px;
+
+  padding: 28px 0 24px;
 
   border-top: 1px solid var(--line);
 
+  background: #0a0a0a;
+
   color: var(--ink-soft);
 
-  font-size: .76rem;
+  font-size: .7rem;
+
+  letter-spacing: .08em;
 }
 
 .footer__inner {
-  display: flex;
+  width: min(1120px, 90%);
 
-  flex-wrap: wrap;
+  margin: 0 auto;
+
+  display: flex;
 
   align-items: center;
 
-  gap: .9rem 1.3rem;
+  justify-content: space-between;
+
+  gap: 25px;
 }
 
 .footer__inner p {
-  margin-right: auto;
+  margin: 0;
+
+  color: rgba(255, 255, 255, .42);
+
+  font-size: .62rem;
+
+  letter-spacing: .15em;
+
+  text-transform: uppercase;
+}
+
+/* Footer links */
+
+.footer__inner > div {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 0;
 }
 
 .footer__inner a {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+
   text-decoration: none;
 
-  transition: color .25s;
+  color: rgba(255, 255, 255, .62);
+
+  font-size: .62rem;
+
+  font-weight: 500;
+
+  letter-spacing: .15em;
+
+  text-transform: uppercase;
+
+  padding: 7px 0;
+
+  margin-left: 26px;
+
+  transition:
+    color .25s ease,
+    transform .25s var(--ease);
 }
+
+/* Small separators between links */
+
+.footer__inner a + a::before {
+  content: "·";
+
+  position: absolute;
+
+  left: -15px;
+
+  color: rgba(255, 255, 255, .22);
+
+  pointer-events: none;
+}
+
+/* Hover */
 
 .footer__inner a:hover {
   color: var(--accent);
+
+  transform: translateY(-2px);
+}
+
+/* Back to top button */
+
+.footer__inner a:last-child {
+  padding: 8px 14px;
+
+  border: 1px solid rgba(255, 255, 255, .18);
+
+  border-radius: 999px;
+
+  color: rgba(255, 255, 255, .72);
+
+  margin-left: 26px;
+
+  transition:
+    background .25s ease,
+    color .25s ease,
+    border-color .25s ease,
+    transform .25s var(--ease);
+}
+
+.footer__inner a:last-child::before {
+  display: none;
+}
+
+.footer__inner a:last-child:hover {
+  background: var(--accent);
+
+  border-color: var(--accent);
+
+  color: var(--accent-ink);
+
+  transform: translateY(-3px);
 }
 
 
@@ -1303,6 +1386,7 @@ html.reveal-ready .reveal.is-visible {
 
 .lightbox__close {
   top: 1.2rem;
+
   right: 1.2rem;
 
   font-size: 1.8rem;
@@ -1466,7 +1550,9 @@ html.reveal-ready .reveal.is-visible {
   *::before,
   *::after {
     animation-duration: .01ms !important;
+
     animation-iteration-count: 1 !important;
+
     transition-duration: .01ms !important;
   }
 
@@ -1481,14 +1567,9 @@ html.reveal-ready .reveal.is-visible {
     width: 100%;
   }
 
-  /*
-    IMPORTANT:
-    There is intentionally NO height rule here.
-    The image keeps its complete original proportions.
-  */
-
   .gallery__btn img {
     width: 100%;
+
     height: auto;
   }
 
@@ -1498,16 +1579,19 @@ html.reveal-ready .reveal.is-visible {
 
   .lightbox__figure img {
     max-width: 96vw;
+
     max-height: 85vh;
   }
 
   .lightbox__close {
     top: .7rem;
+
     right: .7rem;
   }
 
   .lightbox__nav {
     width: 42px;
+
     height: 42px;
   }
 
@@ -1527,14 +1611,59 @@ html.reveal-ready .reveal.is-visible {
     width: 100%;
   }
 
+
+  /* ---------- Mobile Footer ---------- */
+
+  .footer {
+    margin-top: 50px;
+
+    padding: 30px 0 22px;
+  }
+
   .footer__inner {
+    width: 90%;
+
     flex-direction: column;
 
-    align-items: flex-start;
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    text-align: center;
   }
 
   .footer__inner p {
-    margin-right: 0;
+    font-size: .56rem;
+
+    letter-spacing: .13em;
+
+    line-height: 1.6;
+  }
+
+  .footer__inner > div {
+    justify-content: center;
+
+    width: 100%;
+  }
+
+  .footer__inner a {
+    font-size: .56rem;
+
+    letter-spacing: .12em;
+
+    margin-left: 18px;
+  }
+
+  .footer__inner a + a::before {
+    left: -11px;
+  }
+
+  .footer__inner a:last-child {
+    margin-left: 18px;
+
+    padding: 7px 12px;
   }
 
 }
