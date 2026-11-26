@@ -1,8 +1,8 @@
 /* =========================================================
    Rohit Sharma | Model Portfolio, vanilla JS, no libraries.
-   1 Helpers        5 Gallery filter + "Show more" + broken-image cleanup
-   2 Scroll/header  6 Lightbox
-   3 Mobile nav     7 Instagram embed (lazy)
+   1 Helpers        5 Gallery filter (+ broken-image cleanup)
+   2 Scroll/header  6 Full-screen viewer (lightbox)
+   3 Mobile nav     7 Instagram link
    4 Scroll reveal  8 Booking form, 9 Footer year
    ========================================================= */
 (function () {
@@ -15,11 +15,8 @@
     whatsapp: '917494907991'              // country code + number, digits only
   };
 
-  // PASTE THE KESH VAPSI REEL LINK HERE, e.g. 'https://www.instagram.com/reel/AbCdEfGh123/'
   var IG_REEL_URL = 'https://www.instagram.com/p/DdwKUHtk8yR/';
   var IG_PROFILE_URL = 'https://www.instagram.com/rohit_sharmadra/';
-
-  var INITIAL_TILES = 8;                  // gallery tiles shown before "Show more"
 
   /* ---------- 1. Helpers ---------- */
   document.documentElement.classList.add('js');
@@ -35,8 +32,8 @@
   function onScroll() {
     var y = window.scrollY || window.pageYOffset;
     var max = document.documentElement.scrollHeight - window.innerHeight;
-    progress.style.transform = 'scaleX(' + (max > 0 ? y / max : 0) + ')';
-    header.classList.toggle('is-scrolled', y > 10);
+    if (progress) progress.style.transform = 'scaleX(' + (max > 0 ? y / max : 0) + ')';
+    if (header) header.classList.toggle('is-scrolled', y > 10);
     ticking = false;
   }
   window.addEventListener('scroll', function () {
@@ -50,12 +47,15 @@
   var navLinks = $$('.nav__link');
 
   function setMenu(open) {
+    if (!navMenu || !navToggle) return;
     navMenu.classList.toggle('is-open', open);
     navToggle.setAttribute('aria-expanded', String(open));
   }
-  navToggle.addEventListener('click', function () {
-    setMenu(navToggle.getAttribute('aria-expanded') !== 'true');
-  });
+  if (navToggle) {
+    navToggle.addEventListener('click', function () {
+      setMenu(navToggle.getAttribute('aria-expanded') !== 'true');
+    });
+  }
   navLinks.forEach(function (l) { l.addEventListener('click', function () { setMenu(false); }); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
 
@@ -87,35 +87,24 @@
     setTimeout(showAll, 2500);            // failsafe: nothing stays hidden
   }
 
-  /* ---------- 5. Gallery filter + "Show more" ---------- */
+  /* ---------- 5. Gallery filter ---------- */
   var filterBtns = $$('.filters__btn');
   var tiles = $$('.gallery__item');
-  var moreWrap = $('.gallery__more');
-  var moreBtn = $('#galleryMore');
   var activeFilter = 'all';
-  var expanded = false;
 
   function renderGallery(animate) {
-    var matches = tiles.filter(function (t) {
-      return !t.dataset.broken && (activeFilter === 'all' || t.dataset.category === activeFilter);
+    tiles.forEach(function (t) {
+      var match = !t.dataset.broken &&
+                  (activeFilter === 'all' || t.dataset.category === activeFilter);
+      t.classList.remove('is-pop');
+      t.hidden = !match;
+      if (match && animate) { void t.offsetWidth; t.classList.add('is-pop'); }
     });
-    tiles.forEach(function (t) { t.hidden = true; t.classList.remove('is-pop'); });
-
-    matches.forEach(function (t, i) {
-      var show = expanded || i < INITIAL_TILES;
-      t.hidden = !show;
-      if (show && animate) { void t.offsetWidth; t.classList.add('is-pop'); }
-    });
-
-    moreWrap.hidden = matches.length <= INITIAL_TILES;
-    moreBtn.textContent = expanded ? 'Show less' : 'Show more';
-    moreBtn.setAttribute('aria-expanded', String(expanded));
   }
 
   filterBtns.forEach(function (btn) {
     btn.addEventListener('click', function () {
       activeFilter = btn.dataset.filter;
-      expanded = false;
       filterBtns.forEach(function (b) {
         b.classList.toggle('is-active', b === btn);
         b.setAttribute('aria-pressed', String(b === btn));
@@ -123,11 +112,11 @@
       renderGallery(true);
     });
   });
-  moreBtn.addEventListener('click', function () { expanded = !expanded; renderGallery(true); });
 
   // If an image file is missing, drop its tile so no broken-image boxes show
   tiles.forEach(function (tile) {
     var img = $('img', tile);
+    if (!img) return;
     img.addEventListener('error', function () {
       tile.dataset.broken = '1';
       renderGallery(false);
@@ -135,7 +124,7 @@
   });
   renderGallery(false);
 
-  /* ---------- 6. Lightbox ---------- */
+  /* ---------- 6. Full-screen viewer (lightbox) ---------- */
   var lightbox = $('#lightbox');
   var lbImg = $('#lbImg');
   var lbCaption = $('#lbCaption');
@@ -150,9 +139,10 @@
     var img = $('img', visibleBtns[current]);
     lbImg.src = img.currentSrc || img.src;
     lbImg.alt = img.alt;
-    lbCaption.textContent = img.alt + '  ·  ' + (current + 1) + ' / ' + visibleBtns.length;
+    lbCaption.textContent = (current + 1) + ' / ' + visibleBtns.length;
   }
   function openLightbox(btn) {
+    // Only the photos in the active filter can be flipped through
     visibleBtns = $$('.gallery__item:not([hidden]) .gallery__btn');
     lastFocus = btn;
     lightbox.hidden = false;
@@ -167,109 +157,115 @@
     if (lastFocus) lastFocus.focus();
   }
 
-  $$('.gallery__btn').forEach(function (b) { b.addEventListener('click', function () { openLightbox(b); }); });
-  lbClose.addEventListener('click', closeLightbox);
-  lbPrev.addEventListener('click', function () { showImage(current - 1); });
-  lbNext.addEventListener('click', function () { showImage(current + 1); });
-  lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
+  if (lightbox && lbImg && lbCaption && lbClose && lbPrev && lbNext) {
+    $$('.gallery__btn').forEach(function (b) { b.addEventListener('click', function () { openLightbox(b); }); });
+    lbClose.addEventListener('click', closeLightbox);
+    lbPrev.addEventListener('click', function () { showImage(current - 1); });
+    lbNext.addEventListener('click', function () { showImage(current + 1); });
+    lightbox.addEventListener('click', function (e) {
+      // click on the dark area (not on the photo or buttons) closes it
+      if (e.target === lightbox || e.target.tagName === 'FIGURE') closeLightbox();
+    });
 
-  // Keyboard: Esc, arrows, focus trap on Tab
-  document.addEventListener('keydown', function (e) {
-    if (lightbox.hidden) return;
-    if (e.key === 'Escape') closeLightbox();
-    else if (e.key === 'ArrowLeft') showImage(current - 1);
-    else if (e.key === 'ArrowRight') showImage(current + 1);
-    else if (e.key === 'Tab') {
-      var f = [lbClose, lbPrev, lbNext];
-      var idx = f.indexOf(document.activeElement);
-      e.preventDefault();
-      f[((e.shiftKey ? idx - 1 : idx + 1) + f.length) % f.length].focus();
-    }
-  });
+    // Keyboard: Esc, arrows, focus trap on Tab
+    document.addEventListener('keydown', function (e) {
+      if (lightbox.hidden) return;
+      if (e.key === 'Escape') closeLightbox();
+      else if (e.key === 'ArrowLeft') showImage(current - 1);
+      else if (e.key === 'ArrowRight') showImage(current + 1);
+      else if (e.key === 'Tab') {
+        var f = [lbClose, lbPrev, lbNext];
+        var idx = f.indexOf(document.activeElement);
+        e.preventDefault();
+        f[((e.shiftKey ? idx - 1 : idx + 1) + f.length) % f.length].focus();
+      }
+    });
 
-  // Touch swipe
-  var touchX = null;
-  lightbox.addEventListener('touchstart', function (e) { touchX = e.changedTouches[0].clientX; }, { passive: true });
-  lightbox.addEventListener('touchend', function (e) {
-    if (touchX === null) return;
-    var dx = e.changedTouches[0].clientX - touchX;
-    if (Math.abs(dx) > 50) showImage(current + (dx < 0 ? 1 : -1));
-    touchX = null;
-  });
+    // Touch swipe
+    var touchX = null;
+    lightbox.addEventListener('touchstart', function (e) { touchX = e.changedTouches[0].clientX; }, { passive: true });
+    lightbox.addEventListener('touchend', function (e) {
+      if (touchX === null) return;
+      var dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 50) showImage(current + (dx < 0 ? 1 : -1));
+      touchX = null;
+    });
+  }
 
- 
-    /* ---------- 7. Instagram link (no embed) ---------- */
+  /* ---------- 7. Instagram link (no embed) ---------- */
   var igWatch = $('#igWatch');
-  // Once IG_REEL_URL is a real link, the button opens the reel directly
   if (igWatch && IG_REEL_URL.indexOf('REEL_ID') === -1) {
     igWatch.href = IG_REEL_URL;
   }
+
   /* ---------- 8. Booking form ---------- */
   var form = $('#bookingForm');
   var statusEl = $('#formStatus');
 
-  var rules = {
-    name:    function (v) { return v.length >= 2 ? '' : 'Please enter your name.'; },
-    company: function (v) { return v.length >= 2 ? '' : 'Please enter your brand or company.'; },
-    email:   function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? '' : 'Please enter a valid email address.'; },
-    message: function (v) { return v.length >= 10 ? '' : 'Please add a few details (at least 10 characters).'; }
-  };
-
-  function validateField(name) {
-    var input = form.elements[name];
-    var msg = rules[name](input.value.trim());
-    input.closest('.field').classList.toggle('has-error', !!msg);
-    $('[data-error-for="' + name + '"]', form).textContent = msg;
-    input.setAttribute('aria-invalid', msg ? 'true' : 'false');
-    return !msg;
-  }
-  Object.keys(rules).forEach(function (name) {
-    var input = form.elements[name];
-    input.addEventListener('blur', function () { validateField(name); });
-    input.addEventListener('input', function () {
-      if (input.closest('.field').classList.contains('has-error')) validateField(name);
-    });
-  });
-
-  function setStatus(text, type) {
-    statusEl.textContent = text;
-    statusEl.className = 'form__status' + (type ? ' is-' + type : '');
-  }
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var ok = Object.keys(rules).map(validateField).every(Boolean);
-    if (!ok) {
-      setStatus('Please fix the highlighted fields and try again.', 'error');
-      var bad = $('.has-error input, .has-error textarea', form);
-      if (bad) bad.focus();
-      return;
-    }
-
-    var d = {
-      name: form.elements.name.value.trim(),
-      company: form.elements.company.value.trim(),
-      email: form.elements.email.value.trim(),
-      message: form.elements.message.value.trim()
+  if (form && statusEl) {
+    var rules = {
+      name:    function (v) { return v.length >= 2 ? '' : 'Please enter your name.'; },
+      company: function (v) { return v.length >= 2 ? '' : 'Please enter your brand or company.'; },
+      email:   function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? '' : 'Please enter a valid email address.'; },
+      message: function (v) { return v.length >= 10 ? '' : 'Please add a few details (at least 10 characters).'; }
     };
-    var channel = (e.submitter && e.submitter.value) || 'email';
-    var body = 'Hello Rohit,\n\n' + d.message + '\n\n- ' + d.name +
-               '\nBrand / Company: ' + d.company + '\nReply to: ' + d.email;
 
-    if (channel === 'whatsapp') {
-      var url = 'https://wa.me/' + CONTACT.whatsapp + '?text=' +
-                encodeURIComponent('Booking inquiry for Rohit Sharma\n\n' + body);
-      var w = window.open(url, '_blank', 'noopener');
-      if (!w) window.location.href = url;
-      setStatus('Opening WhatsApp with your message ready to send…', 'success');
-    } else {
-      window.location.href = 'mailto:' + CONTACT.emailTo +
-        '?cc=' + encodeURIComponent(CONTACT.emailCc) +
-        '&subject=' + encodeURIComponent('Booking Inquiry: ' + d.company + ' (' + d.name + ')') +
-        '&body=' + encodeURIComponent(body);
-      setStatus('Opening your email app with the message prefilled. Press send there to complete your inquiry.', 'success');
-    }
-  });
+    var validateField = function (name) {
+      var input = form.elements[name];
+      var msg = rules[name](input.value.trim());
+      input.closest('.field').classList.toggle('has-error', !!msg);
+      $('[data-error-for="' + name + '"]', form).textContent = msg;
+      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      return !msg;
+    };
+    Object.keys(rules).forEach(function (name) {
+      var input = form.elements[name];
+      input.addEventListener('blur', function () { validateField(name); });
+      input.addEventListener('input', function () {
+        if (input.closest('.field').classList.contains('has-error')) validateField(name);
+      });
+    });
+
+    var setStatus = function (text, type) {
+      statusEl.textContent = text;
+      statusEl.className = 'form__status' + (type ? ' is-' + type : '');
+    };
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var ok = Object.keys(rules).map(validateField).every(Boolean);
+      if (!ok) {
+        setStatus('Please fix the highlighted fields and try again.', 'error');
+        var bad = $('.has-error input, .has-error textarea', form);
+        if (bad) bad.focus();
+        return;
+      }
+
+      var d = {
+        name: form.elements.name.value.trim(),
+        company: form.elements.company.value.trim(),
+        email: form.elements.email.value.trim(),
+        message: form.elements.message.value.trim()
+      };
+      var channel = (e.submitter && e.submitter.value) || 'email';
+      var body = 'Hello Rohit,\n\n' + d.message + '\n\n- ' + d.name +
+                 '\nBrand / Company: ' + d.company + '\nReply to: ' + d.email;
+
+      if (channel === 'whatsapp') {
+        var url = 'https://wa.me/' + CONTACT.whatsapp + '?text=' +
+                  encodeURIComponent('Booking inquiry for Rohit Sharma\n\n' + body);
+        var w = window.open(url, '_blank', 'noopener');
+        if (!w) window.location.href = url;
+        setStatus('Opening WhatsApp with your message ready to send…', 'success');
+      } else {
+        window.location.href = 'mailto:' + CONTACT.emailTo +
+          '?cc=' + encodeURIComponent(CONTACT.emailCc) +
+          '&subject=' + encodeURIComponent('Booking Inquiry: ' + d.company + ' (' + d.name + ')') +
+          '&body=' + encodeURIComponent(body);
+        setStatus('Opening your email app with the message prefilled. Press send there to complete your inquiry.', 'success');
+      }
+    });
+  }
 
   /* ---------- 9. Footer year ---------- */
   var yearEl = $('#year');
